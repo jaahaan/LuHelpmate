@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paleSilver"
+    android:orientation="horizontal"
+    android:minHeight="100dp"
+    tools:context=".CRActivity">
+
+    <TextView
+        android:id="@+id/batch"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/circlebackgroundgreen"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/floralWhite"
+        android:textSize="20sp"
+        android:textAppearance="?android:textAppearanceSmall"
+        tools:text="@string/batch" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/cr_name"
+            style="@style/crList"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textStyle="bold"
+            android:textColor="@color/EerieBlack_800"
+            tools:text="@string/crName" />
+
+        <TextView
+            android:id="@+id/crId"
+            style="@style/crList"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text="@string/id" />
+
+        <TextView
+            android:id="@+id/crPhoneNo"
+            style="@style/crList"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text="@string/phoneNumber" />
+
+    </LinearLayout>
+    </LinearLayout>

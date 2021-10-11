@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/paleSilver"
+    android:orientation="horizontal"
+    android:minHeight="100dp"
+    tools:context=".BooksActivity">
+
+    <TextView
+        android:id="@+id/code"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:background="@drawable/circlebackgroundgreen"
+        android:gravity="center"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/floralWhite"
+        tools:text="CSE-2217" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/book_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/EerieBlack_800"
+            android:textStyle="bold"
+            tools:text="Data Communications and Networking" />
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/blackOlive_500"
+            tools:text="Book by Behrouz A. Forouzan" />
+
+        <TextView
+            android:id="@+id/edition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/blackOlive_500"
+            tools:text="Fourth Edition" />
+    </LinearLayout>
+</LinearLayout>

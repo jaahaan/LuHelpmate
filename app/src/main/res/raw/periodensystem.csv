@@ -1,0 +1,89 @@
+1,Hydrogen,H,1,1
+2,Helium,He,18,1
+3,Lithium,Li,1,2
+4,Beryllium,Be,2,2
+5,Boron,B,13,2
+6,Carbon,C,14,2
+7,Nitrogen,N,15,2
+8,Oxygen,O,16,2
+9,Fluorine,F,17,2
+10,Neon,Ne,18,2
+11,Sodium (Natrium),Na,1,3
+12,Magnesium,Mg,2,3
+13,Aluminium (Aluminum),Al,13,3
+14,Silicon,Si,14,3
+15,Phosphorus,P,15,3
+16,Sulfur,S,16,3
+17,Chlorine,Cl,17,3
+19,Potassium (Kalium),K,1,4
+18,Argon,Ar,18,3
+20,Calcium,Ca,2,4
+21,Scandium,Sc,3,4
+22,Titanium,Ti,4,4
+23,Vanadium,V,5,4
+24,Chromium,Cr,6,4
+25,Manganese,Mn,7,4
+26,Iron (Ferrum),Fe,8,4
+28,Nickel,Ni,10,4
+27,Cobalt,Co,9,4
+29,Copper (Cuprum),Cu,11,4
+30,Zinc,Zn,12,4
+31,Gallium,Ga,13,4
+32,Germanium,Ge,14,4
+33,Arsenic,As,15,4
+34,Selenium,Se,16,4
+35,Bromine,Br,17,4
+36,Krypton,Kr,18,4
+37,Rubidium,Rb,1,5
+38,Strontium,Sr,2,5
+39,Yttrium,Y,3,5
+40,Zirconium,Zr,4,5
+41,Niobium,Nb,5,5
+42,Molybdenum,Mo,6,5
+43,Technetium,Tc,7,5
+44,Ruthenium,Ru,8,5
+45,Rhodium,Rh,9,5
+46,Palladium,Pd,10,5
+47,Silver (Argentum),Ag,11,5
+48,Cadmium,Cd,12,5
+49,Indium,In,13,5
+50,Tin (Stannum),Sn,14,5
+51,Antimony (Stibium),Sb,15,5
+52,Tellurium,Te,16,5
+53,Iodine,I,17,5
+54,Xenon,Xe,18,5
+55,Caesium (Cesium),Cs,1,6
+56,Barium,Ba,2,6
+71,Lutetium,Lu,3,6
+72,Hafnium,Hf,4,6
+73,Tantalum,Ta,5,6
+74,Tungsten (Wolfram),W,6,6
+75,Rhenium,Re,7,6
+76,Osmium,Os,8,6
+77,Iridium,Ir,9,6
+78,Platinum,Pt,10,6
+79,Gold (Aurum),Au,11,6
+80,Mercury (Hydrargyrum),Hg,12,6
+81,Thallium,Tl,13,6
+82,Lead (Plumbum),Pb,14,6
+83,Bismuth,Bi,15,6
+84,Polonium,Po,16,6
+85,Astatine,At,17,6
+86,Radon,Rn,18,6
+87,Francium,Fr,1,7
+88,Radium,Ra,2,7
+103,Lawrencium,Lr,3,7
+104,Rutherfordium,Rf,4,7
+105,Dubnium,Db,5,7
+106,Seaborgium,Sg,6,7
+107,Bohrium,Bh,7,7
+108,Hassium,Hs,8,7
+109,Meitnerium,Mt,9,7
+110,Darmstadtium,Ds,10,7
+111,Roentgenium,Rg,11,7
+112,Ununbium,Uub,12,7
+113,Ununtrium,Uut,13,7
+114,Ununquadium,Uuq,14,7
+115,Ununpentium,Uup,15,7
+116,Ununhexium,Uuh,16,7
+118,Ununoctium,Uuo,18,7

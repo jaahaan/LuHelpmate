@@ -1,0 +1,2 @@
+rootProject.name = "LU HelpMate"
+include ':app'

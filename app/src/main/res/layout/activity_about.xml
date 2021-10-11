@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/floralWhite"
+    android:orientation="vertical"
+    tools:context=".AboutActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/lu1" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="@string/about"
+            android:textColor="@color/flame_800"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            style="@style/text"
+            android:layout_marginBottom="10dp"
+            android:text="@string/aboutCSE" />
+
+        <TextView
+            style="@style/text"
+            android:text="@string/vision"
+            android:textColor="@color/EerieBlack_800" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/blackOlive_500" />
+
+        <TextView
+            style="@style/text"
+            android:layout_marginBottom="10dp"
+            android:text="@string/visionText" />
+
+        <TextView
+            style="@style/text"
+            android:text="@string/mission"
+            android:textColor="@color/EerieBlack_800" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/blackOlive_500" />
+
+        <TextView
+            style="@style/text"
+            android:layout_marginBottom="10dp"
+            android:text="@string/missionText" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="20dp"
+            android:text="@string/academicActivities"
+            android:textColor="@color/flame_800"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <TextView
+            style="@style/text"
+            android:layout_marginBottom="10dp"
+            android:text="@string/academic" />
+
+        <TextView
+            style="@style/text"
+            android:text="@string/teachingStrategy"
+            android:textColor="@color/EerieBlack_800" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/blackOlive_500" />
+
+        <TextView
+            style="@style/text"
+            android:layout_marginBottom="10dp"
+            android:text="@string/teachingStrategyText" />
+
+        <TextView
+            style="@style/text"
+            android:text="@string/assessmentStrategy"
+            android:textColor="@color/EerieBlack_800" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/blackOlive_500" />
+
+        <TextView
+            style="@style/text"
+            android:layout_marginBottom="10dp"
+            android:text="@string/assessmentStrategyText" />
+    </LinearLayout>
+
+
+</ScrollView>

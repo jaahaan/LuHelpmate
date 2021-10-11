@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/floralWhite"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/listView"
+        android:background="@color/EerieBlack_800"
+        android:text="@string/dept"
+        android:textColor="@color/paleSilver"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        style="@style/listView"
+        android:padding="5dp"
+        android:text="@string/routine"
+        android:textColor="@color/flame_800"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/batchR"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/batch"
+            android:inputType="number"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/sectionR"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:hint="@string/section"
+            android:inputType="text"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fetchR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/fetch" />
+
+    <TextView
+        android:id="@+id/headerR"
+        style="@style/listView"
+        android:textColor="@color/flame_800"
+        android:layout_marginTop="5dp"
+        android:textSize="22sp" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        />
+</LinearLayout>
