@@ -44,27 +44,19 @@ public class RoutineActivity extends AppCompatActivity implements View.OnClickLi
             String s = f + "\n1st Semester, Batch : " + i + ", Section: " + j;
             headerR.setText(s);
 
-            objects.add(new Object("Course Code", "Course Title", "Credit", "Prerequisite"));
-            objects.add(new Object("ENG-1111", "English Reading and Speaking", "3", "-"));
-            objects.add(new Object("MAT-1111", "Differential and Integral Calculus", "3", "-"));
-            objects.add(new Object("CSE-1111", "Introduction To Computers", "2", "-"));
-            objects.add(new Object("CSE-1112", "Introduction To Computers Sessional", "1", "-"));
-            objects.add(new Object("CHE-2311", "Chemistry", "2", "-"));
-            objects.add(new Object("CHE-2312", "Chemistry Laboratory", "1", "-"));
-            objects.add(new Object("CEE-2110", "Engineering Drawing", "1.5", "-"));
-            objects.add(new Object("", "Total Credit", "13.5", ""));
+            objects.add(new Object("", "Monday", "", ""));
+            objects.add(new Object("11.00 AM-11.50 AM", "EEE-1111", "JTE", "*"));
+            objects.add(new Object("12.00 PM-12.50 PM", "EEE-1111", "JTE", "*"));
+            objects.add(new Object("01.00 PM-01.50 PM", "Break", "", ""));
+            objects.add(new Object("01.00 PM-01.50 PM", "Break", "", ""));
+
+            objects.add(new Object("", "Wed", "", ""));
         }
         else if (i == 57) {
-            String s = f + "\n1st Semester, Batch : " + i;
+            String s = f + "\n2st Semester, Batch : " + i;
             headerR.setText(s);
 
-            objects.add(new Object("Course Code", "Course Title", "Credit", "Prerequisite"));
-            objects.add(new Object("ENG-1311", "English Writing and Listening", "3", "ENG-1111"));
-            objects.add(new Object("MAT-1213", "Linear Algebra & Complex Analysis", "3", "-"));
-            objects.add(new Object("CSE-1213", "Computer Programming", "3", "-"));
-            objects.add(new Object("CSE-1214", "Computer Programming Sessional", "1", "-"));
-            objects.add(new Object("CSE-1215", "Discrete Mathematics", "3", "-"));
-            objects.add(new Object("", "Total Credit", "13", ""));
+            
         }
         else {
             Toast.makeText(this, getString(R.string.toast1), Toast.LENGTH_SHORT).show();
