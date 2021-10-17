@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/cr_name"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceMedium"
             android:textStyle="bold"
             android:textColor="@color/EerieBlack_800"
@@ -39,13 +39,13 @@
 
         <TextView
             android:id="@+id/crId"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceMedium"
             tools:text="@string/id" />
 
         <TextView
             android:id="@+id/crPhoneNo"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceMedium"
             tools:text="@string/phoneNumber" />
 

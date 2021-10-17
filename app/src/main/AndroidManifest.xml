@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/luicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon"
+        android:roundIcon="@mipmap/luicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.LUHelpMate">
         <activity android:name=".NoticeActivity"></activity>

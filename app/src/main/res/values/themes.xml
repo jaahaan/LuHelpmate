@@ -32,7 +32,7 @@
         <item name="android:textColor">@color/EerieBlack_800</item>
     </style>
 
-    <style name="crList">
+    <style name="facultyAndCrList">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="maxLines">2</item>

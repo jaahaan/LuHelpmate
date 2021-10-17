@@ -19,30 +19,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/faculty_name"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceMedium"
             android:textStyle="bold"
             tools:text="Name" />
 
         <TextView
             android:id="@+id/rank"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceSmall"
             tools:text="Rank" />
 
         <TextView
             android:id="@+id/contact"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceSmall"
             tools:text="contact" />
 
         <TextView
             android:id="@+id/email"
-            style="@style/crList"
+            style="@style/facultyAndCrList"
             android:textAppearance="?android:textAppearanceSmall"
             tools:text="Email" />
 

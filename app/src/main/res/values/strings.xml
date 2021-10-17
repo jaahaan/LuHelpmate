@@ -33,13 +33,14 @@
     <string name="phoneNumber">Phone Number</string>
 
     <string name="courseOffer">Semester-wise course offering, Fall-2021</string>
-    <string name="editText">Semester</string>
     <string name="semester">Semester</string>
     <string name="fetch">Fetch</string>
     <string name="program">Program: B.Sc in CSE</string>
 
     <string name="notice">Notice</string>
     <string name="toast1">Not Found</string>
+    <string name="toast2">Please Enter Your Batch</string>
+
     //Transport
     <string name="transportService">Transport Service</string>
     <string name="LutransportService">Leading University Transport Service</string>
@@ -53,8 +54,5 @@
     <string name="R2">Tilagor, Shibgonj, Naiorpul, Osmani Park, Surma Tower, Jitumiar pt, Kazirbazar Bridge, Lamabazar, Rikabibazar, Radio Office, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST Gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
     <string name="R3">Lakkatura, Chowkidekhi pt, Khashdobir, Mazumdar fulkoli, Amberkhana, Dorshondewry, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
     <string name="R4">Tilagor, Shibgonj, Naiorpul, Subhanighat pt, Rose View pt, Humayun Rashid Chattar, Chandirpul, Bypass, Rail Crossing, Ragib Nagar.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>
