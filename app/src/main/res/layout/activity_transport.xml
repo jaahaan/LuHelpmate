@@ -16,9 +16,9 @@
         <TextView
             style="@style/listView"
             android:background="@color/EerieBlack_800"
-            android:text="@string/transportService"
-            android:textColor="@color/paleSilver"
-            android:textSize="30sp" />
+            android:text="@string/regularBusSchedule"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/floralWhite" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:text="1"
+                android:text="@string/one"
                 android:textAlignment="center"
                 android:textColor="@color/EerieBlack_800"
                 android:textSize="16sp" />
@@ -158,7 +158,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:text="2"
+                android:text="@string/two"
                 android:textAlignment="center"
                 android:textColor="@color/EerieBlack_800"
                 android:textSize="16sp" />
@@ -192,6 +192,8 @@
                 android:text="@string/R2"
                 android:textColor="@color/EerieBlack_800"
                 android:textSize="12sp" />
+
+
         </LinearLayout>
 
         <View
@@ -209,7 +211,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:text="3"
+                android:text="@string/three"
                 android:textAlignment="center"
                 android:textColor="@color/EerieBlack_800"
                 android:textSize="16sp" />
@@ -260,11 +262,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="5dp"
-                android:text="4"
+                android:text="@string/four"
                 android:textAlignment="center"
                 android:textColor="@color/EerieBlack_800"
-                android:textSize="16sp"
-                />
+                android:textSize="16sp" />
 
             <View
                 android:layout_width="2dp"

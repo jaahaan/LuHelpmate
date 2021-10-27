@@ -8,23 +8,30 @@
 
     <TextView
         style="@style/listView"
-        android:background="@color/EerieBlack_800"
         android:text="@string/dept"
-        android:textColor="@color/paleSilver"
-        android:textSize="30sp" />
+        android:textColor="@color/flame_800"
+        android:textSize="25sp" />
 
 
     <TextView
         style="@style/listView"
+        android:layout_height="wrap_content"
         android:text="@string/courseOffer"
         android:textColor="@color/flame_800"
-        android:textSize="20sp" />
+        android:textSize="21sp" />
 
     <TextView
         style="@style/listView"
         android:text="@string/program"
         android:textColor="@color/flame_800"
-        android:textSize="23sp" />
+        android:textSize="21sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/blackOlive_500" />
 
     <EditText
         android:id="@+id/batchC"

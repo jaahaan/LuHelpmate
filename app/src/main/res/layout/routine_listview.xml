@@ -7,40 +7,48 @@
 
     <TextView
         style="@style/listView"
-        android:background="@color/EerieBlack_800"
         android:text="@string/dept"
-        android:textColor="@color/paleSilver"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textColor="@color/flame_800"
+        android:textSize="26sp" />
 
     <TextView
         style="@style/listView"
-        android:padding="5dp"
         android:text="@string/routine"
         android:textColor="@color/flame_800"
         android:textSize="25sp" />
 
+    <TextView
+        style="@style/listView"
+        android:text="@string/program"
+        android:textColor="@color/flame_800"
+        android:textSize="25sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/blackOlive_500" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_margin="6dp">
 
         <TextView
             android:id="@+id/session"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="15sp"
-            />
+            android:layout_marginStart="10dp"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/lastUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textSize="15sp"
+            android:layout_marginEnd="10dp"
             android:gravity="end"
-            />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +60,7 @@
             android:id="@+id/batchR"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:hint="@string/batch"
             android:inputType="number"
             android:textAlignment="center" />
@@ -77,14 +85,13 @@
     <TextView
         android:id="@+id/headerR"
         style="@style/listView"
-        android:textColor="@color/flame_800"
         android:layout_marginTop="5dp"
+        android:textColor="@color/flame_800"
         android:textSize="20sp" />
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        />
+        android:orientation="vertical" />
 </LinearLayout>

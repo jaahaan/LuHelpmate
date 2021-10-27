@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,19 +14,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/image_slider"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/lu1" />
-
+            android:layout_height="280dp"
+            app:sliderAnimationDuration="800"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorAnimationDuration="800"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            app:sliderIndicatorSelectedColor="@color/paleSilver"
+            app:sliderIndicatorUnselectedColor="@color/floralWhite"
+            app:sliderScrollTimeInSec="2"
+            app:sliderStartAutoCycle="true" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="@string/about"
             android:textColor="@color/flame_800"
             android:textSize="35sp"
@@ -76,7 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="@string/academicActivities"
             android:textColor="@color/flame_800"
             android:textSize="35sp"

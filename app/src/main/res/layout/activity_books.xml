@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/paleSilver"
-    android:orientation="horizontal"
     android:minHeight="100dp"
+    android:orientation="horizontal"
     tools:context=".BooksActivity">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="70dp"
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
-        android:background="@drawable/circlebackgroundgreen"
+        android:background="@drawable/circleblack"
         android:gravity="center"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/floralWhite"
@@ -26,14 +26,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="5dp"
-        android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/book_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="2"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/EerieBlack_800"
             android:textStyle="bold"
@@ -44,18 +42,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:maxLines="1"
             android:textAllCaps="true"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/blackOlive_500"
-            tools:text="Book by Behrouz A. Forouzan" />
+            tools:text="Author Name" />
 
         <TextView
             android:id="@+id/edition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:maxLines="1"
             android:textAllCaps="true"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/blackOlive_500"

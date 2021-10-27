@@ -22,11 +22,11 @@ public class FacultyAdapter extends ArrayAdapter<Object> {
         // Check if there is an existing list item view (called convertView) that we can reuse,
         // otherwise, if convertView is null, then inflate a new list item layout.
         View listItemView = convertView;
-        if (listItemView == null){
+        if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.activity_faculty, parent, false);
         }
 
-        // Find the book at the given position in the list of faculty
+        // Find Faculty Member at the given position in the list of faculty
         Object currentFaculty = getItem(position);
 
 
@@ -39,7 +39,6 @@ public class FacultyAdapter extends ArrayAdapter<Object> {
         TextView contact = listItemView.findViewById(R.id.contact);
         contact.setText(currentFaculty.getContactFaculty());
 
-        // Find the TextView with the ID
         TextView email = listItemView.findViewById(R.id.email);
         email.setText(currentFaculty.getEmail());
 

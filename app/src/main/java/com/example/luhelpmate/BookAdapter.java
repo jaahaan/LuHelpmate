@@ -40,23 +40,19 @@ public class BookAdapter extends ArrayAdapter<Object> {
 
         // Find the TextView in the activity_books.xml layout with the ID
         TextView bookName = listItemView.findViewById(R.id.book_name);
-
         bookName.setText(currentBook.getBookName());
 
         // Find the TextView in the activity_books.xml layout with the ID
         TextView authorName = listItemView.findViewById(R.id.author_name);
-
         authorName.setText(currentBook.getAuthorName());
 
         // Find the TextView in the activity_books.xml layout with the ID
         TextView edition = listItemView.findViewById(R.id.edition);
-
         edition.setText(currentBook.getEdition());
 
 
         // Find the TextView in the activity_books.xml layout with the ID
         TextView courseCode = listItemView.findViewById(R.id.code);
-
         courseCode.setText(currentBook.getCourseCode());
 
         return listItemView;

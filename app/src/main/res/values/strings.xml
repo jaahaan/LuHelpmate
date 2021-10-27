@@ -1,15 +1,39 @@
 <resources>
+    //Sign Up
+    <string name="signUp">Sign Up</string>
+    <string name="createYourAccount">Create Your Account</string>
+    <string name="UserName">Name</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="Password">Password</string>
+    <string name="or">OR</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="AlreadyHaveAccount">Already Have Account? Login</string>
+    <string name="signIn">Sign In</string>
+    <string name="forgotPass">Forgot your password?</string>
+    <string name="SignInToYourAccount">Sign In To Your Account</string>
+    <string name="AlreadyLoggedIn">Already Logged In</string>
+
+
     //home
     <string name="app_name">LU HelpMate</string>
     <string name="lu">Leading University</string>
     <string name="dept">Department of CSE</string>
     <string name="about">About</string>
     <string name="course_offerings">Course Offerings</string>
-    <string name="routine">Routine</string>
+    <string name="routine">Class Routine</string>
     <string name="books">Reference Books</string>
     <string name="faculty">Faculty Members</string>
     <string name="cr">Class Representatives</string>
     <string name="transport">Transport Service</string>
+    <string name="Events">Events</string>
+    <string name="campusFacilities">Campus Facilities</string>
+    <string name="wifi">Free Wi-Fi Access</string>
+    <string name="labs">Highly Equipped Labs</string>
+    <string name="activities">Extra Curricular Activities</string>
+    <string name="ricLibrary">Rich Library</string>
+    <string name="AcClassRooms">AC Class Rooms</string>
+    <string name="Waiver">Up to 75% Waiver</string>
     //About
     <string name="aboutCSE">Importance of Computer Science and Engineering for the development and progress of society, and the need for specialists in this field has become obvious in our daily life. The University acknowledges this importance and has therefore introduced Department of Computer Science &amp; Engineering by giving all academic, financial and administrative support to the department.</string>
     <string name="vision">Vision of the Program:</string>
@@ -40,11 +64,16 @@
     <string name="notice">Notice</string>
     <string name="toast1">Not Found</string>
     <string name="toast2">Please Enter Your Batch</string>
+    <string name="toast3">Not Available</string>
 
     //Transport
-    <string name="transportService">Transport Service</string>
+    <string name="regularBusSchedule">Regular Bus Schedule</string>
     <string name="LutransportService">Leading University Transport Service</string>
     <string name="route">Route</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
     <string name="startingPoint">Starting Point</string>
     <string name="bStopPoint">Bus Stoppage Point</string>
     <string name="tilagor">Tilagor</string>

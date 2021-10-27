@@ -6,13 +6,22 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/luicon"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/luicon"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.LUHelpMate">
-        <activity android:name=".NoticeActivity"></activity>
-        <activity android:name=".HomeActivity">
+        <activity android:name=".SignInActivity"></activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/signUp">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/NoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +29,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".MainActivity"
+            android:theme="@style/NoActionbar" />
+        <activity
+            android:name=".HomeActivity"
+            android:theme="@style/NoActionbar" />
+        <activity
             android:name=".AboutActivity"
-            android:label="@string/about">
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+        <activity
+            android:name=".NoticeActivity"
+            android:label="@string/notice">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
@@ -49,14 +71,14 @@
         </activity>
         <activity
             android:name=".RoutineActivity"
-            android:label="@string/routine">
+            android:label="">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
         </activity>
         <activity
             android:name=".CourseOfferingsActivity"
-            android:label="@string/course_offerings">
+            android:label="">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity" />
