@@ -1,7 +1,10 @@
 <resources>
     //Sign Up
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
     <string name="signUp">Sign Up</string>
-    <string name="createYourAccount">Create Your Account</string>
+    <string name="createAccountS">Create Account As Student</string>
+    <string name="createAccountT">Create Account As Teacher</string>
     <string name="UserName">Name</string>
     <string name="EmailAddress">Email Address</string>
     <string name="Password">Password</string>
@@ -11,12 +14,16 @@
     <string name="AlreadyHaveAccount">Already Have Account? Login</string>
     <string name="signIn">Sign In</string>
     <string name="forgotPass">Forgot your password?</string>
-    <string name="SignInToYourAccount">Sign In To Your Account</string>
+    <string name="SignInAsS">Sign In As Student</string>
+    <string name="SignInAsT">Sign In As Teacher</string>
     <string name="AlreadyLoggedIn">Already Logged In</string>
+    <string name="createNewAccount">Create New Account</string>
 
 
     //home
     <string name="app_name">LU HelpMate</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
     <string name="lu">Leading University</string>
     <string name="dept">Department of CSE</string>
     <string name="about">About</string>
@@ -56,10 +63,18 @@
     <string name="id">Student ID</string>
     <string name="phoneNumber">Phone Number</string>
 
-    <string name="courseOffer">Semester-wise course offering, Fall-2021</string>
+    <string name="courseOffer">Semester-wise Course Offering</string>
+    <string name="CourseCode">Course Code</string>
+    <string name="CourseTeacher">Course Teacher</string>
+    <string name="CourseTitle">Course Title</string>
+    <string name="credit">Credit</string>
+    <string name="prerequisite">Prerequisite</string>
     <string name="semester">Semester</string>
     <string name="fetch">Fetch</string>
-    <string name="program">Program: B.Sc in CSE</string>
+    <string name="program">B. Sc. in Computer Science and Engineering</string>
+    <string name="addNewCourse">Add New Course</string>
+    <string name="listOfCourses">List Of Courses</string>
+    <string name="batchlist">Batch List</string>
 
     <string name="notice">Notice</string>
     <string name="toast1">Not Found</string>
@@ -83,5 +98,11 @@
     <string name="R2">Tilagor, Shibgonj, Naiorpul, Osmani Park, Surma Tower, Jitumiar pt, Kazirbazar Bridge, Lamabazar, Rikabibazar, Radio Office, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST Gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
     <string name="R3">Lakkatura, Chowkidekhi pt, Khashdobir, Mazumdar fulkoli, Amberkhana, Dorshondewry, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
     <string name="R4">Tilagor, Shibgonj, Naiorpul, Subhanighat pt, Rose View pt, Humayun Rashid Chattar, Chandirpul, Bypass, Rail Crossing, Ragib Nagar.</string>
+
+    <string name="noticeTitle">Notice Title</string>
+    <string name="update">Update</string>
+    <string name="name">Name</string>
+    <string name="initial">Initial</string>
+    <string name="add">Add</string>
 
 </resources>

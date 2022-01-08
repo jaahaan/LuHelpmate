@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Admin</string>
+
+    //Sign Up
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
+    <string name="acronym">University Short Name</string>
+    <string name="signUp">Sign Up</string>
+    <string name="createYourAccount">Create Your Account</string>
+    <string name="UserName">Name</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="Password">Password</string>
+    <string name="or">OR</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="AlreadyHaveAccount">Already Have Account? Login</string>
+    <string name="signIn">Sign In</string>
+    <string name="forgotPass">Forgot your password?</string>
+    <string name="SignInToYourAccount">Sign In To Your Account</string>
+    <string name="AlreadyLoggedIn">Already Logged In</string>
+    <string name="createNewAccount">Create New Account</string>
+
+
+    //home
+    <string name="appname">LU HelpMate</string>
+    <string name="lu">Leading University</string>
+    <string name="dept">Department of CSE</string>
+    <string name="about">About</string>
+    <string name="course_offerings">Course Offerings</string>
+    <string name="routine">Class Routine</string>
+    <string name="books">Reference Books</string>
+    <string name="faculty">Faculty Members</string>
+    <string name="cr">Class Representatives</string>
+    <string name="transport">Transport Service</string>
+    <string name="Events">Events</string>
+    <string name="campusFacilities">Campus Facilities</string>
+    <string name="wifi">Free Wi-Fi Access</string>
+    <string name="labs">Highly Equipped Labs</string>
+    <string name="activities">Extra Curricular Activities</string>
+    <string name="ricLibrary">Rich Library</string>
+    <string name="AcClassRooms">AC Class Rooms</string>
+    <string name="Waiver">Up to 75% Waiver</string>
+    //About
+    <string name="aboutCSE">Importance of Computer Science and Engineering for the development and progress of society, and the need for specialists in this field has become obvious in our daily life. The University acknowledges this importance and has therefore introduced Department of Computer Science &amp; Engineering by giving all academic, financial and administrative support to the department.</string>
+    <string name="vision">Vision of the Program:</string>
+    <string name="visionText">To become a prominent department of Computer Science and Engineering producing competent professionals with research and innovation skills, including moral values and social concerns.</string>
+    <string name="mission">Mission of the Program:</string>
+    <string name="missionText">The mission of the Computer Science and Engineering Department is to prepare students for careers as software professionals and for advanced studies in Computer Science and Engineering Filed. We develop and work with a range of technologies to build systems and applications that help solve today’s problems, and share skills and knowledge with the community.
+        We are committed to providing the opportunity to master the computer science and Engineering discipline to students from all backgrounds. Our program combines strong fundamentals, project- and team- oriented activities, and soft skills, leading to a well-rounded professional education.</string>
+
+    <string name="academicActivities">Academic Activities</string>
+    <string name="academic">Currently the Department offers Bachelor of Science (Honors) in Computer Science &amp; Engineering program at undergraduate level and is looking forward to offer Master of Science in Computer Science &amp; Engineering (M.Sc./M.Engg. in CSE) program at graduate level. Besides, CSE Department is offering General Education Courses in Computer Science to the students enrolled in other bachelor programs at the University.</string>
+    <string name="teachingStrategy">Teaching Strategy:</string>
+    <string name="teachingStrategyText">Teachers of Computer Science &amp; Engineering department use lecture, reading assignment, group assignment, role playing, presentation, students centered learning/ interactive teaching, seminar in theory courses and for practical courses they use demonstration, project / assignment, lab work. The teaching aids that are used by the teachers are: multimedia projector, whiteboard, overhead projector but now-a-days mostly multimedia projector.</string>
+    <string name="assessmentStrategy">Assessment Strategy:</string>
+    <string name="assessmentStrategyText">In the common examination ordinance of Leading University there is a provision of at least 2(two) class tests, Mid-Term and final examination. Class tests are considered as continuous assessment. There are also provisions of Lab performance viva in practical examinations. However, the teachers follow class room assessment, written examination (essay question. short question, objective question in the form of MCQ, T/F, fill in the blanks, matching, yes/no etc.), viva voce, dissertation, assignment, practical exam etc.</string>
+
+    //CR
+    <string name="batch">Batch</string>
+    <string name="section">Section</string>
+    <string name="crName">CR Name</string>
+    <string name="id">Student ID</string>
+    <string name="phoneNumber">Phone Number</string>
+
+    <string name="courseOffer">Semester-wise course offering, Fall-2021</string>
+    <string name="semester">Semester</string>
+    <string name="fetch">Fetch</string>
+    <string name="program">Program: B.Sc in CSE</string>
+
+    <string name="notice">Notice</string>
+    <string name="toast1">Not Found</string>
+    <string name="toast2">Please Enter Your Batch</string>
+    <string name="toast3">Not Available</string>
+
+    //Transport
+    <string name="regularBusSchedule">Regular Bus Schedule</string>
+    <string name="LutransportService">Leading University Transport Service</string>
+    <string name="route">Route</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="startingPoint">Starting Point</string>
+    <string name="bStopPoint">Bus Stoppage Point</string>
+    <string name="tilagor">Tilagor</string>
+    <string name="tilagorST">Tilagor/Surma Tower</string>
+    <string name="lakkatura">Lakkatura</string>
+    <string name="R1">Tilagor, Baluchar, TB Gate, Eidgah, Electric Supply, Amberkhana, Dorshondewry, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST Gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
+    <string name="R2">Tilagor, Shibgonj, Naiorpul, Osmani Park, Surma Tower, Jitumiar pt, Kazirbazar Bridge, Lamabazar, Rikabibazar, Radio Office, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST Gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
+    <string name="R3">Lakkatura, Chowkidekhi pt, Khashdobir, Mazumdar fulkoli, Amberkhana, Dorshondewry, Subidbazar, Londony Road, Pathantula, Modina Market, Surmagate, SUST gate, Temukhi Bridge, Rail Crossing, Ragib Nagar.</string>
+    <string name="R4">Tilagor, Shibgonj, Naiorpul, Subhanighat pt, Rose View pt, Humayun Rashid Chattar, Chandirpul, Bypass, Rail Crossing, Ragib Nagar.</string>
+</resources>

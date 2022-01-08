@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/floralWhite"
+    android:orientation="vertical"
+    tools:context=".CourseOfferActivity">
+
+    <TextView
+        style="@style/listView"
+        android:text="@string/dept"
+        android:textColor="@color/flame_800"
+        android:textSize="25sp" />
+
+
+    <TextView
+        style="@style/listView"
+        android:layout_height="wrap_content"
+        android:text="@string/courseOffer"
+        android:textColor="@color/flame_800"
+        android:textSize="21sp" />
+
+    <TextView
+        style="@style/listView"
+        android:text="@string/program"
+        android:textColor="@color/flame_800"
+        android:textSize="21sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/blackOlive_500" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/batchC"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:hint="@string/batch"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:layout_marginEnd="10dp"/>
+    <EditText
+        android:id="@+id/section"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:hint="@string/section"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/courseCode"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:hint="Code"
+            android:textAlignment="center"
+            android:layout_marginEnd="10dp"/>
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:hint="Title"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:layout_marginStart="10dp"/>
+            android:layout_marginEnd="10dp"/>
+        <EditText
+            android:id="@+id/credit"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:hint="Credit"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:layout_marginStart="10dp"/>
+            android:layout_marginEnd="10dp"/>
+        <EditText
+            android:id="@+id/prerequisite"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:hint="Prerequisite"
+            android:textAlignment="center"
+            android:layout_marginStart="10dp"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/fetchC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add" />
+
+    <TextView
+        android:id="@+id/headerC"
+        style="@style/listView"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/flame_800"
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </ListView>
+
+</LinearLayout>

@@ -14,17 +14,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="NoActionbar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/blackOlive_500</item>
-        <item name="colorPrimaryVariant">@color/EerieBlack_800</item>
-        <item name="colorOnPrimary">@color/floralWhite</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/flame_500</item>
-        <item name="colorSecondaryVariant">@color/flame_800</item>
-        <item name="colorOnSecondary">@color/floralWhite</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-    </style>
 
     <style name="cardText">
         <item name="android:layout_height">match_parent</item>
@@ -55,6 +44,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">5dp</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:textColor">@color/EerieBlack_800</item>
     </style>

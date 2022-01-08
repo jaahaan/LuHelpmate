@@ -2,45 +2,41 @@ package com.example.luhelpmate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import com.example.luhelpmate.Admin.AdminSignInActivity;
+import com.example.luhelpmate.User.studentSignIn;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button signUp, signIn;
-    TextView alreadyIn;
+    Button sSignIn, tSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        signUp = findViewById(R.id.button1);
-        signIn = findViewById(R.id.button2);
-        alreadyIn = findViewById(R.id.alreadyIn);
+        sSignIn = findViewById(R.id.button1);
+        tSignIn = findViewById(R.id.button2);
 
-        signUp.setOnClickListener(this);
-        signIn.setOnClickListener(this);
-        alreadyIn.setOnClickListener(this);
+        sSignIn.setOnClickListener(this);
+        tSignIn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button1) {
-            Intent signUpIntent = new Intent(MainActivity.this, SignUpActivity.class);
+            Intent signUpIntent = new Intent(MainActivity.this, studentSignIn.class);
             startActivity(signUpIntent);
         }
 
         if (v.getId() == R.id.button2) {
-            Intent signInIntent = new Intent(MainActivity.this, SignInActivity.class);
-            startActivity(signInIntent);
+            Intent intent = new Intent(MainActivity.this, AdminSignInActivity.class);
+            startActivity(intent);
         }
-        if (v.getId() == R.id.alreadyIn) {
-            Intent alreadyInIntent = new Intent(MainActivity.this, HomeActivity.class);
-            startActivity(alreadyInIntent);
-            finish();
-        }
+
     }
 }

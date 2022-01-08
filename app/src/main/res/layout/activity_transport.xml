@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/floralWhite"
     android:orientation="vertical"
-    tools:context=".TransportActivity">
+    tools:context=".User.TransportActivity">
 
 
     <LinearLayout

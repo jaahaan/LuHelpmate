@@ -2,6 +2,8 @@ package com.example.luhelpmate;
 
 public class Object {
 
+
+
     /**
      * Faculty member
      */

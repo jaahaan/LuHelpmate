@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/floralWhite"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".User.HomeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:padding="5dp"
             android:text="@string/lu"
             android:textColor="@color/paleSilver"
-            android:textSize="40sp" />
+            android:textSize="35sp" />
     </LinearLayout>
 
 

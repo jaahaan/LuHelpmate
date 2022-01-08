@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "885754194582",
+    "firebase_url": "https://lu-helpmate-default-rtdb.firebaseio.com",
+    "project_id": "lu-helpmate",
+    "storage_bucket": "lu-helpmate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885754194582:android:d1c1b97e0c8523dcce70b7",
+        "android_client_info": {
+          "package_name": "com.example.luhelpmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885754194582-a9eho8kf4i7a0pj43gq0mlpldeiriico.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDBxetutHDvp9mk5yY10RQyFgEt_x9KNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885754194582-a9eho8kf4i7a0pj43gq0mlpldeiriico.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
