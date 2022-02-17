@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/floralWhite"
     android:orientation="vertical"
-    tools:context=".User.HomeActivity">
+    tools:context=".User.HomeActivityUser">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -294,7 +293,7 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/bus"
+                    android:id="@+id/batch"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
@@ -331,7 +330,7 @@
 
                         <TextView
                             style="@style/cardText"
-                            android:text="@string/transport" />
+                            android:text="@string/batchlist" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -373,7 +372,7 @@
 
                         <TextView
                             style="@style/cardText"
-                            android:text="@string/books" />
+                            android:text="@string/courseList" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -392,7 +391,6 @@
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <LinearLayout
-
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/paleSilver"

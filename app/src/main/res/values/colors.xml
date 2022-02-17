@@ -6,11 +6,13 @@
     <color name="blackOlive_500">#403D39</color>
     <color name="EerieBlack_800">#252422</color>
 
-    <color name="flame_100">#ed6e3d</color>
-    <color name="flame_500">#EB5E28</color>
-    <color name="flame_800">#d35424</color>
+    <color name="flame_100">#a69b97</color>
+    <color name="flame_200">#8d6e63</color>
+    <color name="flame_500">#8c6d62</color>
+    <color name="flame_800">#5e4238</color>
 
     <color name="floralWhite">#FFFCF2</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="bgOpacity1">#AB686666</color>
     <color name="bgOpacity2">#AB363535</color>

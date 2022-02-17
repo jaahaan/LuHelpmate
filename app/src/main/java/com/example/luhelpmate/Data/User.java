@@ -2,38 +2,28 @@ package com.example.luhelpmate.Data;
 
 public class User {
 
-    private String profilepic;
-    private String name;
-    private String email;
-    private String password;
-    private String id;
-    private String bio;
+    private String Image, name, initial, designation, email, admin, uid;
 
 
     public User() {
     }
 
-    public User(String profilepic, String name, String email, String password, String id, String bio) {
-        this.profilepic = profilepic;
+    public User(String image, String name, String initial, String designation, String email, String admin, String uid) {
+        Image = image;
         this.name = name;
+        this.initial = initial;
+        this.designation = designation;
         this.email = email;
-        this.password = password;
-        this.id = id;
-        this.bio = bio;
+        this.admin = admin;
+        this.uid = uid;
     }
 
-    //signup constrictor
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public String getImage() {
+        return Image;
     }
 
-    public String getProfilepic() {
-        return profilepic;
-    }
-
-    public void setProfilepic(String profilepic) {
-        this.profilepic = profilepic;
+    public void setImage(String image) {
+        Image = image;
     }
 
     public String getName() {
@@ -44,6 +34,22 @@ public class User {
         this.name = name;
     }
 
+    public String getInitial() {
+        return initial;
+    }
+
+    public void setInitial(String initial) {
+        this.initial = initial;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -52,30 +58,19 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAdmin() {
+        return admin;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 
-    public String getId() {
-        return id;
+    public String getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-
-
-    }
+}

@@ -2,17 +2,15 @@ package com.example.luhelpmate.Data;
 
 public class NoticeData {
 
-    /**
-     * Notice
-     */
-    String title, image, date, time, key;
+    String title, image, pdf, date, time, key;
     public  NoticeData(){
 
     }
 
-    public NoticeData(String title, String image, String date, String time, String key){
+    public NoticeData(String title, String image, String pdf, String date, String time, String key){
         this.title = title;
         this.image = image;
+        this.pdf = pdf;
         this.date = date;
         this.time = time;
         this.key = key;
@@ -32,6 +30,14 @@ public class NoticeData {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPdf() {
+        return pdf;
+    }
+
+    public void setPdf(String pdf) {
+        this.pdf = pdf;
     }
 
     public String getDate() {

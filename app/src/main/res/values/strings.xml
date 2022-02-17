@@ -34,6 +34,7 @@
     <string name="cr">Class Representatives</string>
     <string name="transport">Transport Service</string>
     <string name="Events">Events</string>
+    <string name="clubs">Clubs</string>
     <string name="campusFacilities">Campus Facilities</string>
     <string name="wifi">Free Wi-Fi Access</string>
     <string name="labs">Highly Equipped Labs</string>
@@ -73,7 +74,7 @@
     <string name="fetch">Fetch</string>
     <string name="program">B. Sc. in Computer Science and Engineering</string>
     <string name="addNewCourse">Add New Course</string>
-    <string name="listOfCourses">List Of Courses</string>
+    <string name="courseList">Course List</string>
     <string name="batchlist">Batch List</string>
 
     <string name="notice">Notice</string>
@@ -103,6 +104,31 @@
     <string name="update">Update</string>
     <string name="name">Name</string>
     <string name="initial">Initial</string>
+    <string name="teacherInitial">Teacher Initial</string>
+    <string name="designation">Designation</string>
+
     <string name="add">Add</string>
+    <string name="_8942">⋮</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="snooze">Snooze</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_new_cr">Add New CR</string>
+    <string name="search">search</string>
+    <string name="make_admin">Make admin</string>
+    <string name="no_file_selected">No File Selected</string>
+    <string name="session">Session</string>
+    <string name="student_list">Student List</string>
+    <string name="admin">Admin</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="manage_user">Manage User</string>
+    <string name="share">Share</string>
+    <string name="previous_questions">Previous Questions</string>
+    <string name="download">Download</string>
+    <string name="edit_info">Edit Info</string>
+    <string name="delete">Delete</string>
+    <string name="remove_admin">Remove admin</string>
+    <string name="profile">Profile</string>
 
 </resources>

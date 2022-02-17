@@ -4,78 +4,224 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.LUHelpMate">
-        <activity android:name=".Admin.AddBatchActivity"></activity>
-        <activity android:name=".Admin.AddCourseActivity" />
-        <activity android:name=".Admin.OfferCourseActivity" />
-        <activity android:name=".Admin.AdminCourseOfferingActivity" />
-        <activity android:name=".Admin.BatchListActivity" android:label="Batch"/>
-        <activity android:name=".User.BooksActivity" />
-        <activity android:name=".Admin.AddCrActivity" />
-        <activity android:name=".Admin.AddFacultyActivity" />
-        <activity android:name=".Admin.AdminNoticeActivity" android:label="@string/notice"/>
-        <activity android:name=".Admin.AdminBookActivity" android:label="@string/books"/>
-        <activity android:name=".Admin.UpdateNoticeActivity" />
-        <activity android:name=".Admin.AdminTransportActivity" />
-        <activity android:name=".Admin.AdminCrActivity" android:label="@string/cr"/>
-        <activity android:name=".Admin.AdminFacultyActivity" android:label="@string/faculty"/>
-        <activity android:name=".Admin.AdminRoutineActivity" />
-        <activity android:name=".Admin.AdminAboutActivity" />
-        <activity android:name=".Admin.AdminHomeActivity" />
-        <activity android:name=".Admin.AdminSignInActivity" android:label="@string/signIn"/>
-        <activity android:name=".Admin.AdminSignUpActivity" android:label="@string/signUp"/>
-        <activity android:name=".Admin.CoursesList" android:label="@string/listOfCourses"/>
+        <activity android:name=".Admin.AddPreviousQuestions"></activity>
+        <activity android:name=".Admin.PreviousQuestionsActivity" />
+        <activity android:name=".UserInfoActivity" />
+        <activity android:name=".Settings" />
+        <activity android:name=".ProvideInfo" />
+        <activity android:name=".PdfViewerActivity" />
+        <activity android:name=".User.BookActivityUser" />
+        <activity android:name=".Admin.AddBookActivityAdmin" />
+        <activity android:name=".Admin.AddClubActivityAdmin" />
+        <activity android:name=".Admin.ClubActivityAdmin" />
         <activity
-            android:name=".User.studentSignIn"
-            android:label="@string/signIn" />
+            android:name=".Admin.ForgetPassword"
+            android:label="Find Your Account" />
         <activity
-            android:name=".User.studentSignUp"
-            android:label="@string/signUp" />
+            android:name=".ImageViewActivity"
+            android:label="" />
+        <activity
+            android:name=".User.CourseListUser"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity
+            android:name=".User.BatchListUser"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity
+            android:name=".User.CrActivityUser"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity android:name=".User.UserProfile" />
+        <activity
+            android:name=".User.HomeActivityUser"
+            android:label="" />
+        <activity
+            android:name=".User.AboutActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity
+            android:name=".User.NoticeActivityUser"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity
+            android:name=".User.TransportActivityUser"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity android:name=".RoutineActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity
+            android:name=".User.FacultyActivityUser"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".User.HomeActivityUser" />
+        </activity>
+        <activity
+            android:name=".Admin.BookActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.AddNoticeActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.NoticeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.NoticeActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.TransportActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.CourseList"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.AddCourseActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.CourseList" />
+        </activity>
+        <activity
+            android:name=".Admin.BatchListActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.RoutineActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.CrEditActivity"
+            android:hardwareAccelerated="false"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.CrActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.AddCrActivity"
+            android:hardwareAccelerated="false"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.CrActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.CrActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.FacultyEditActivity"
+            android:hardwareAccelerated="false"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.FacultyActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.AddFacultyActivity"
+            android:hardwareAccelerated="false"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.FacultyActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.FacultyActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.OfferCourseActivity"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.CourseOfferingActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.CourseOfferingActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.AboutActivityAdmin"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Admin.HomeActivityAdmin" />
+        </activity>
+        <activity
+            android:name=".Admin.HomeActivityAdmin"
+            android:label="@string/lu" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".User.HomeActivity" />
-        <activity android:name=".User.AboutActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".User.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".User.UserNoticeActivity"
-            android:label="@string/notice">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".User.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".User.TransportActivity"
-            android:label="@string/transport">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".User.HomeActivity" />
-        </activity>
-        <activity android:name=".RoutineActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".User.HomeActivity" />
-        </activity>
-        <activity
-            android:name=".User.UserFacultyActivity"
-            android:label="@string/faculty">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".User.HomeActivity" />
         </activity>
     </application>
 

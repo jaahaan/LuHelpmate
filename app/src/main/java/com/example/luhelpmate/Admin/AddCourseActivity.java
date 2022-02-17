@@ -1,8 +1,14 @@
 package com.example.luhelpmate.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -58,14 +64,16 @@ public class AddCourseActivity extends AppCompatActivity {
             cCredit.requestFocus();
         } else {
             if (prerequisite.isEmpty()) {
-                cPrerequisite.setText("-");
+                prerequisite ="-";
                 pd.setMessage("Adding...");
                 pd.show();
                 uploadData();
             }
-            pd.setMessage("Adding...");
-            pd.show();
-            uploadData();
+            else {
+                pd.setMessage("Adding...");
+                pd.show();
+                uploadData();
+            }
         }
     }
 
@@ -77,11 +85,38 @@ public class AddCourseActivity extends AppCompatActivity {
 
         dbRef.child(code).setValue(courseOfferData).addOnSuccessListener(unused -> {
             pd.dismiss();
-            Toast.makeText(AddCourseActivity.this, "Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
             cCode.setText("");
             cTitle.setText("");
             cCredit.setText("");
             cPrerequisite.setText("");
+
+            Intent intent = new Intent(this, CourseList.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Course Notification")
+                    .setSmallIcon(R.drawable.splashicon)
+                    .setContentTitle("New Course")
+                    .setContentText("Course Title: " +title).setStyle(new NotificationCompat.BigTextStyle())
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent).setAutoCancel(true);
+
+            NotificationManager mNotificationManager = (NotificationManager)
+                    getSystemService(Context. NOTIFICATION_SERVICE ) ;
+            if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
+                int importance = NotificationManager. IMPORTANCE_HIGH ;
+                NotificationChannel notificationChannel = new NotificationChannel( "Course Notification" , "Course Notification" , importance) ;
+                builder.setChannelId( "Course Notification" ) ;
+                assert mNotificationManager != null;
+                mNotificationManager.createNotificationChannel(notificationChannel) ;
+            }
+            assert mNotificationManager != null;
+            mNotificationManager.notify(( int ) System. currentTimeMillis () ,
+                    builder.build()) ;
+
         }).addOnFailureListener(e -> {
             pd.dismiss();
             Toast.makeText(AddCourseActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();

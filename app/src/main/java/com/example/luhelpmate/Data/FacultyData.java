@@ -4,20 +4,21 @@ import android.widget.AdapterView;
 
 public class FacultyData {
 
-    String name, designation, acronym, phone, email, image, key;
+    String name, designation, initial, phone, email, image, key, no;
 
     public FacultyData() {
 
     }
 
-    public FacultyData(String name, String acronym, String designation, String phone, String email, String image, String key) {
+    public FacultyData(String name, String initial, String designation, String phone, String email, String image, String key, String no) {
         this.name = name;
-        this.acronym = acronym;
+        this.initial = initial;
         this.designation = designation;
         this.phone = phone;
         this.email = email;
         this.image = image;
         this.key = key;
+        this.no = no;
     }
 
     public String getName() {
@@ -28,12 +29,12 @@ public class FacultyData {
         this.name = name;
     }
 
-    public String getAcronym() {
-        return acronym;
+    public String getInitial() {
+        return initial;
     }
 
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
+    public void setInitial(String initial) {
+        this.initial = initial;
     }
 
     public String getDesignation() {
@@ -76,4 +77,11 @@ public class FacultyData {
         this.key = key;
     }
 
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 }

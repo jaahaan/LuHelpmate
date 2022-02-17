@@ -12,13 +12,23 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <TextView
+            style="@style/listView"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_cr"
+            android:layout_margin="10dp"
+            android:textSize="30sp" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/addCrImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            app:civ_circle_background_color="@color/floralWhite"
+            app:civ_border_color="@color/floralWhite"
+            app:civ_border_width="2dp"
             android:layout_margin="10dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/download"
             />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -31,6 +41,7 @@
                 android:id="@+id/addCrName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapWords"
                 android:hint="@string/name" />
         </com.google.android.material.textfield.TextInputLayout>
 

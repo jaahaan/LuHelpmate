@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="6dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/flame_100"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            app:civ_border_color="@color/EerieBlack_800"
+            app:civ_border_width="2dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/name"
+                    style="@style/facultyAndCrList"
+                    android:maxLines="2"
+                    android:textColor="@color/EerieBlack_800"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    tools:text="@string/name" />
+
+                <TextView
+                    android:id="@+id/initial"
+                    style="@style/facultyAndCrList"
+                    android:layout_marginStart="10dp"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:textColor="@color/EerieBlack_800"
+                    tools:text="@string/initial" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/designation"
+                style="@style/facultyAndCrList"
+                android:textColor="@color/EerieBlack_800"
+                android:textAppearance="?android:textAppearanceSmall"
+                tools:text="Designation" />
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/emailIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="3dp"
+                    app:drawableStartCompat="@drawable/email" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_toEndOf="@+id/emailIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/EerieBlack_800"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    tools:text="Email" />
+
+                <TextView
+                    android:id="@+id/admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="@color/EerieBlack_800"
+                    android:background="@drawable/backgroundeditview"
+                    android:text="Admin"
+                    android:layout_alignParentEnd="true"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="@string/_8942"
+                android:textSize="25sp"
+                android:id="@+id/txtOption"
+                android:layout_gravity="end"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

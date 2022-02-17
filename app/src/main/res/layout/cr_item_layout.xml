@@ -1,114 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/crItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="6dp"
-    app:cardCornerRadius="6dp"
-    app:cardUseCompatPadding="true">
+    android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/paleSilver"
-        android:padding="5dp"
-        >
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/crImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_vertical"
+            app:civ_circle_background_color="@color/floralWhite"
             app:civ_border_color="@color/EerieBlack_800"
             app:civ_border_width="2dp" />
 
-
         <LinearLayout
-            android:id="@+id/linear"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/crImage"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/batch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textStyle="bold"
+                    tools:text="@string/batch" />
+
+                <TextView
+                    android:id="@+id/crBatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="25dp"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textStyle="bold"
+                    tools:text="@string/batch" />
+
+                <TextView
+                    android:id="@+id/section"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textStyle="bold"
+                    tools:text="@string/section" />
+
+                <TextView
+                    android:id="@+id/crSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textStyle="bold"
+                    tools:text="a" />
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/crBatch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAllCaps="true"
+                android:id="@+id/crName"
+                style="@style/facultyAndCrList"
+                android:maxLines="2"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/EerieBlack_800"
                 android:textStyle="bold"
-                tools:text="@string/batch" />
+                tools:text="@string/name" />
 
-            <TextView
-                android:id="@+id/crSection"
-                android:layout_width="0dp"
+
+            <LinearLayout
+                android:id="@+id/callIcon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAllCaps="true"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/EerieBlack_800"
-                android:textStyle="bold"
-                tools:text="@string/section" />
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="3dp"
+                    android:src="@drawable/ic_baseline_call_24" />
+
+                <TextView
+                    android:id="@+id/crContact"
+                    style="@style/facultyAndCrList"
+                    android:paddingTop="3dp"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    tools:text="Contact" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/emailIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="3dp"
+                    android:src="@drawable/ic_baseline_email_24" />
+
+                <TextView
+                    android:id="@+id/crEmail"
+                    style="@style/facultyAndCrList"
+                    android:paddingTop="3dp"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    tools:text="Email" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/crName"
-            style="@style/facultyAndCrList"
-            android:layout_below="@+id/linear"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/crImage"
-            android:textAppearance="?android:textAppearanceMedium"
-            tools:text="@string/name" />
 
-        <TextView
-            android:id="@+id/crId"
-            style="@style/facultyAndCrList"
-            android:layout_below="@+id/crName"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/crImage"
-            android:textAppearance="?android:textAppearanceSmall"
-            tools:text="@string/id" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/crContact"
-            style="@style/facultyAndCrList"
-            android:layout_below="@+id/crId"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/crImage"
-            android:textAppearance="?android:textAppearanceSmall"
-            tools:text="Contact" />
+            <TextView
+                android:id="@+id/txtOption"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingTop="2dp"
+                android:text="@string/_8942"
+                android:textSize="35sp" />
 
-        <TextView
-            android:id="@+id/crEmail"
-            style="@style/facultyAndCrList"
-            android:layout_below="@+id/crContact"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@+id/crImage"
-            android:textAppearance="?android:textAppearanceSmall"
-            tools:text="Email" />
+        </LinearLayout>
+    </LinearLayout>
 
-
-        <ImageView
-            android:id="@+id/updateCr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/edit_icon" />
-
-        <ImageView
-            android:id="@+id/deleteCr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/updateCr"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/delete_icon" />
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="100dp"
+        android:background="@color/bgOpacity1" />
+</LinearLayout>

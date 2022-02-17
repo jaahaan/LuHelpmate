@@ -3,9 +3,18 @@ package com.example.luhelpmate.Admin;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,7 +41,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.util.regex.*;
 
 public class AddCrActivity extends AppCompatActivity {
 
@@ -45,6 +54,7 @@ public class AddCrActivity extends AppCompatActivity {
     private DatabaseReference databaseReference, dbRef;
     private StorageReference storageReference;
     private ProgressDialog pd;
+    Pattern p = Pattern.compile("[0][1][0-9]{9}");
     String batch, section, name, id, phone, email, downloadUrl = "";
 
     String[] itemsBatch = new String[]{"Batch", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58"};
@@ -96,9 +106,30 @@ public class AddCrActivity extends AppCompatActivity {
         });
 
         addCrImg.setOnClickListener(v -> {
-            openGallery();
+            if (hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                openGallery();
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQ);
+            }
         });
         updateCr.setOnClickListener(v -> checkValidation());
+    }
+
+    private boolean hasPermission(Context context, String permission) {
+        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQ) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery();
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
     }
 
     private void checkValidation() {
@@ -108,13 +139,11 @@ public class AddCrActivity extends AppCompatActivity {
         phone = addCrPhn.getText().toString();
         email = addCrEmail.getText().toString();
 
-        if(batch.equals("Batch")){
+        if (batch.equals("Batch")) {
             Toast.makeText(AddCrActivity.this, "Please Provide Batch", Toast.LENGTH_SHORT).show();
-        }
-        else if(section.equals("Section")){
+        } else if (section.equals("Section")) {
             section = "-";
-        }
-        else if (name.isEmpty()) {
+        } else if (name.isEmpty()) {
             addCrName.setError("Empty");
             addCrName.requestFocus();
         } else if (id.isEmpty()) {
@@ -123,7 +152,7 @@ public class AddCrActivity extends AppCompatActivity {
         } else if (phone.isEmpty()) {
             addCrPhn.setError("Empty");
             addCrPhn.requestFocus();
-        } else if (phone.length() != 11) {
+        } else if (!p.matcher(phone).matches()) {
             addCrPhn.setError("Enter a valid Mobile Number");
             addCrPhn.requestFocus();
         } else if (email.isEmpty()) {
@@ -146,10 +175,10 @@ public class AddCrActivity extends AppCompatActivity {
 
     private void uploadImage() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
         byte[] finalimg = baos.toByteArray();
         final StorageReference filePath;
-        filePath = storageReference.child("Cr").child(finalimg + "jpg");
+        filePath = storageReference.child("Cr").child(finalimg + "png");
         final UploadTask uploadTask = filePath.putBytes(finalimg);
         uploadTask.addOnCompleteListener(AddCrActivity.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -178,41 +207,46 @@ public class AddCrActivity extends AppCompatActivity {
     private void uploadData() {
         final String uniqueKey = databaseReference.push().getKey();
 
-        CrData crData = new CrData("Batch: " + batch, "Section: " + section, "Name: " + name, "ID: " + id, "Contact: " + phone, "Email: " + email, downloadUrl, uniqueKey);
+        CrData crData = new CrData(batch, section, name, id, phone, email, downloadUrl, uniqueKey);
 
-        databaseReference.child(id).setValue(crData).addOnSuccessListener(unused -> {
-            //noticeImg.setImageBitmap(null);
+        databaseReference.child(uniqueKey).setValue(crData).addOnSuccessListener(unused -> {
+
             pd.dismiss();
             Toast.makeText(AddCrActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-            addCrImg.setImageResource(R.mipmap.ic_launcher);
 
-            addBatch.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, itemsBatch));
-            addBatch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    batch = addBatch.getSelectedItem().toString();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
-
-            addSection.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, itemsSection));
-            addSection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    section = addSection.getSelectedItem().toString();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                }
-            });
+            /**addCrImg.setImageResource(R.drawable.download);
             addCrName.setText("");
             addCrId.setText("");
             addCrPhn.setText("");
-            addCrEmail.setText("");
+            addCrEmail.setText("");*/
+
+            // Create an explicit intent for an Activity in your app
+            Intent intent = new Intent(this, CrActivityAdmin.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "Cr Notification")
+                    .setSmallIcon(R.drawable.splashicon)
+                    .setContentTitle("New CR")
+                    .setContentText("Name: " +name).setStyle(new NotificationCompat.BigTextStyle())
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setContentIntent(pendingIntent).setAutoCancel(true);
+
+            NotificationManager mNotificationManager = (NotificationManager)
+                    getSystemService(Context. NOTIFICATION_SERVICE ) ;
+            if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
+                int importance = NotificationManager. IMPORTANCE_HIGH ;
+                NotificationChannel notificationChannel = new NotificationChannel( "Cr Notification" , "Cr Notification" , importance) ;
+                builder.setChannelId( "Cr Notification" ) ;
+                assert mNotificationManager != null;
+                mNotificationManager.createNotificationChannel(notificationChannel) ;
+            }
+            assert mNotificationManager != null;
+            mNotificationManager.notify(( int ) System. currentTimeMillis () ,
+                    builder.build()) ;
+
         }).addOnFailureListener(e -> {
             pd.dismiss();
             Toast.makeText(AddCrActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
@@ -231,8 +265,8 @@ public class AddCrActivity extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                Toast.makeText(this, "Out Of Memory. Please Choose another One", Toast.LENGTH_SHORT).show();
             }
             addCrImg.setImageBitmap(bitmap);
         }
