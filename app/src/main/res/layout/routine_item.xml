@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="8dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/paleSilver"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/circleblack"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/floralWhite"
+                tools:text="Dept" />
+
+            <TextView
+                android:id="@+id/batchSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/floralWhite"
+                tools:text="@string/batch" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:id="@+id/timeSlot"
+                    style="@style/facultyAndCrList"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/EerieBlack_800"
+                    tools:text="Time Slot" />
+                <TextView
+                    android:id="@+id/room"
+                    style="@style/facultyAndCrList"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/EerieBlack_800"
+                    tools:text="Room" />
+
+                <TextView
+                    android:id="@+id/code"
+                    style="@style/facultyAndCrList"
+                    android:padding="5dp"
+                    android:layout_below="@+id/timeSlot"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/EerieBlack_800"
+                    tools:text="@string/CourseCode" />
+
+                <TextView
+                    android:id="@+id/initial"
+                    style="@style/facultyAndCrList"
+                    android:padding="5dp"
+                    android:layout_below="@+id/room"
+                    android:layout_alignParentEnd="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/EerieBlack_800"
+                    tools:text="@string/initial" />
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

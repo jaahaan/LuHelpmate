@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
     <item
         android:id="@+id/profile"
         app:showAsAction="always"
         android:title="@string/profile"
         app:actionLayout="@layout/profile_menu_layout"/>
-
 
 </menu>

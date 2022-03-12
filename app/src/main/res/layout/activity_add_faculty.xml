@@ -4,102 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AddFacultyActivity">
-
-    <LinearLayout
+    tools:context=".Faculty.AddFacultyActivity">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            style="@style/listView"
-            android:layout_height="wrap_content"
-            android:text="Add New Faculty Member"
-            android:layout_margin="10dp"
-            android:textSize="30sp" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/addFacultyImg"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:civ_circle_background_color="@color/floralWhite"
-            app:civ_border_color="@color/floralWhite"
-            app:civ_border_width="2dp"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:src="@drawable/download" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addfacultyName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapWords"
-                android:hint="@string/name" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addFacultyAcronym"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapCharacters"
-                android:hint="@string/initial" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/designation"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:background="@android:drawable/btn_dropdown"
-            android:gravity="center"
-            />
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
+            <TextView
+                style="@style/listView"
+                android:layout_height="wrap_content"
+                android:text="@string/add_new_faculty_member"
+                android:layout_margin="10dp"
+                android:textSize="30sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addfacultyPhn"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/addFacultyImg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:civ_circle_background_color="@color/floralWhite"
+                app:civ_border_color="@color/floralWhite"
+                app:civ_border_width="2dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:src="@drawable/download" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addfacultyName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:hint="@string/name" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addFacultyAcronym"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:hint="@string/initial" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/designation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phoneNumber"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addfacultyEmail"
+                android:spinnerMode="dropdown"
+                android:backgroundTint="@color/flame_200"
+                android:background="@android:drawable/btn_dropdown"
+                android:gravity="center"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/EmailAddress"
-                android:inputType="textEmailAddress"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
 
-        <Button
-            android:id="@+id/addFaculty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/update" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addfacultyPhn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phoneNumber"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addfacultyEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/EmailAddress"
+                    android:inputType="textEmailAddress"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/addFaculty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/update" />
+
+        </LinearLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </ScrollView>

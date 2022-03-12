@@ -21,11 +21,11 @@
 
 
     //home
-    <string name="app_name">LU HelpMate</string>
+    <string name="app_name">HelpMate</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="lu">Leading University</string>
-    <string name="dept">Department of CSE</string>
+    <string name="dept">Department</string>
     <string name="about">About</string>
     <string name="course_offerings">Course Offerings</string>
     <string name="routine">Class Routine</string>
@@ -130,5 +130,9 @@
     <string name="delete">Delete</string>
     <string name="remove_admin">Remove admin</string>
     <string name="profile">Profile</string>
+    <string name="add_new_faculty_member">Add New Faculty Member</string>
+    <string name="advisor_list">Batch-wise Advisor List</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="title">Title</string>
 
 </resources>

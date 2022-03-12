@@ -1,28 +1,16 @@
 package com.example.luhelpmate;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.example.luhelpmate.Admin.HomeActivityAdmin;
-import com.example.luhelpmate.User.HomeActivityUser;
+import com.example.luhelpmate.Login.MainActivity;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -101,7 +89,7 @@ public class SplashScreen extends AppCompatActivity {
             GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
             if (signInAccount != null || mAuth.getCurrentUser() != null) {
                 //check(mAuth.getCurrentUser().getUid());
-                startActivity(new Intent(getApplicationContext(), HomeActivityAdmin.class));
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             } else {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }

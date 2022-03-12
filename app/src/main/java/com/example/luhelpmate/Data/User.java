@@ -2,18 +2,19 @@ package com.example.luhelpmate.Data;
 
 public class User {
 
-    private String Image, name, initial, designation, email, admin, uid;
+    private String Image, name, initial, designation, email, department, admin, uid;
 
 
     public User() {
     }
 
-    public User(String image, String name, String initial, String designation, String email, String admin, String uid) {
-        Image = image;
+    public User(String image, String name, String initial, String designation, String email, String department, String admin, String uid) {
+        this.Image = image;
         this.name = name;
         this.initial = initial;
         this.designation = designation;
         this.email = email;
+        this.department = department;
         this.admin = admin;
         this.uid = uid;
     }
@@ -56,6 +57,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getAdmin() {

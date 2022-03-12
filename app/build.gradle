@@ -81,6 +81,9 @@ dependencies {
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
+    implementation 'com.karumi:dexter:6.2.2'
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

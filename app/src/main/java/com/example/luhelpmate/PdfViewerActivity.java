@@ -73,6 +73,23 @@ public class PdfViewerActivity extends AppCompatActivity {
             return true;
         });
 
+        share.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("application/pdf");
+                    //shareIntent.putExtra(Intent.EXTRA_SUBJECT, "LU");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, url + getApplicationContext().getPackageName());
+
+                    startActivity(Intent.createChooser(shareIntent, "Share With"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 }

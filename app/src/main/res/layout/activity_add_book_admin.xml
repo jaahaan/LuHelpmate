@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Admin.AddBookActivityAdmin">
+    tools:context=".Book.AddBookActivityAdmin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -116,11 +116,12 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="6">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapCharacters"
+                android:padding="15dp"
                 android:hint="@string/CourseCode" />
         </com.google.android.material.textfield.TextInputLayout>
 

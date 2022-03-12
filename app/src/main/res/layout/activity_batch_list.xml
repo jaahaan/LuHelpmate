@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -70,52 +73,10 @@
             style="@style/listView"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:layout_margin="5dp"
             android:text="@string/batchlist"
             android:textSize="21sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/blackOlive_500" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/flame_100"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/EerieBlack_800"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:text="@string/batch" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/EerieBlack_800"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:text="@string/section" />
-
-            <TextView
-                android:id="@+id/t"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/blackOlive_500" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/addBatchRecycler"
@@ -123,7 +84,7 @@
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="false" />
     </LinearLayout>
-
+    </androidx.core.widget.NestedScrollView>
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"

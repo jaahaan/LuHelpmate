@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.AddCourseActivity">
+    tools:context=".CourseList.AddCourseActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,11 +49,12 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/codeC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapCharacters"
+                    android:padding="10dp"
                     android:hint="@string/CourseCode" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,11 +66,12 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/titleC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
+                    android:padding="10dp"
                     android:hint="@string/CourseTitle" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,11 +82,12 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/creditC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/credit"
+                    android:padding="10dp"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,11 +99,12 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
                     android:id="@+id/prerequisiteC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapCharacters"
+                    android:padding="10dp"
                     android:hint="@string/prerequisite" />
             </com.google.android.material.textfield.TextInputLayout>
 

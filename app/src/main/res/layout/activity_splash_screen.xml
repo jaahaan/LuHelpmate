@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="200dp"
-        android:src="@drawable/splashicon" />
+        android:src="@drawable/splash_icon" />
 
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/progressBar"
