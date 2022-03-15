@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Routine.RoutineActivity">
-
+    tools:context=".CourseOfferings.CourseOfferingsActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -32,49 +31,55 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="@string/session"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_toRightOf="@+id/session"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:text="-year"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceSmall" />
 
-            <TextView
+            <LinearLayout
                 android:id="@+id/lastUpdated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/date"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:text="Last Updated: "
-                android:textAppearance="?android:textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"
-                android:text="date"
-                android:textAppearance="?android:textAppearanceMedium" />
-        </RelativeLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-</LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Last Updated: "
+                    android:textAppearance="?android:textAppearanceSmall" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="date"
+                    android:textAppearance="?android:textAppearanceSmall" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

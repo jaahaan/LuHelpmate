@@ -61,13 +61,11 @@ public class MainActivity extends AppCompatActivity {
 
         SignIn = findViewById(R.id.button);
 
-        SignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = signInClient.getSignInIntent();
-                startActivityForResult(intent, GOOGLE_SIGN_IN_CODE);
-            }
+        SignIn.setOnClickListener(v -> {
+            Intent intent = signInClient.getSignInIntent();
+            startActivityForResult(intent, GOOGLE_SIGN_IN_CODE);
         });
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -84,20 +82,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         //check(authResult.getUser().getUid());
-
                         //For institutional email verification
                         if (authResult.getUser().getEmail().matches("(cse_)[\\d]{10}(@lus.ac.bd)") || authResult.getUser().getEmail().matches("[a-b A-Z]+(_cse)?(@lus.ac.bd)") || authResult.getUser().getEmail().matches("njlisa25@gmail.com")) {
                             check(authResult.getUser().getUid());
                         } else {
-                            pd.dismiss();
-                            Toast.makeText(getApplicationContext(), "Select Your Institutional Email.", Toast.LENGTH_SHORT).show();
-                            FirebaseAuth.getInstance().signOut();
+                           FirebaseAuth.getInstance().signOut();
                             GoogleSignIn.getClient(getApplicationContext(), new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()).signOut().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class)
-                                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Select Your Institutional Email.", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -131,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         userInfo.put("designation", "");
                         userInfo.put("initial", "");
                         userInfo.put("department", "");
-                        userInfo.put("admin", "");
+                        userInfo.put("admin", "2");
                         userInfo.put("uid", user.getUid());
                         df.set(userInfo);
                         startActivity(new Intent(getApplicationContext(), ProvideInfo.class));
@@ -141,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else if (documentSnapshot.getString("admin").equals("")) {
+                } else if (documentSnapshot.getString("initial").equals("")) {
                     try {
                         FirebaseUser user = mAuth.getCurrentUser();
                         DocumentReference df = firestore.collection("Users").document(user.getUid());
@@ -152,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                         userInfo.put("designation", "");
                         userInfo.put("initial", "");
                         userInfo.put("department", "");
-                        userInfo.put("admin", "");
+                        userInfo.put("admin", "2");
                         userInfo.put("uid", user.getUid());
                         df.set(userInfo);
                         pd.dismiss();

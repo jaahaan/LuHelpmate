@@ -59,7 +59,6 @@
                 android:text="Last Updated: "
                 android:textAppearance="?android:textAppearanceMedium"
                 android:visibility="gone"/>
-
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
@@ -71,6 +70,7 @@
                 android:text="date"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:visibility="gone"/>
+
         </RelativeLayout>
 
         <LinearLayout
@@ -83,7 +83,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabGravity="fill"
-                app:tabMode="auto" />
+                app:tabMode="fixed"
+                app:tabIndicatorColor="@color/flame_200"
+                app:tabSelectedTextColor="@color/flame_200"
+                />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"

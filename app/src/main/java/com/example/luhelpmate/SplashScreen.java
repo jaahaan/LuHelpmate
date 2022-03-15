@@ -40,39 +40,6 @@ public class SplashScreen extends AppCompatActivity {
         thread.start();
     }
 
-    /**private void check(String uid) {
-        try {
-            DocumentReference df = firestore.collection("Users").document(uid);
-            df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if (documentSnapshot.getString("admin") != null) {
-                        if (documentSnapshot.getString("admin").equals("1")) {
-                            startActivity(new Intent(getApplicationContext(), HomeActivityAdmin.class)
-                                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
-
-                        } else if (documentSnapshot.getString("admin").equals("2")) {
-                            startActivity(new Intent(getApplicationContext(), HomeActivityUser.class)
-                                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
-                        }
-                    } else{
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplicationContext(), "Error!!!", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }*/
 
     public void doWork() {
         for (int progress = 50; progress <= 100; progress += 50) {

@@ -130,12 +130,12 @@ public class StudentFragment extends Fragment {
                             userInfo.put("image", signInAccount.getPhotoUrl().toString());
                             userInfo.put("name", name.getText().toString().trim());
                             userInfo.put("designation", id.getText().toString().trim());
-                            userInfo.put("initial", batch.getText().toString() + section.getText().toString());
+                            userInfo.put("initial", batch.getText().toString().trim() + section.getText().toString().trim());
                             userInfo.put("department", department);
                             userInfo.put("admin", "2");
                             userInfo.put("uid", user.getUid());
                             df.set(userInfo);
-                            startActivity(new Intent(getContext(), HomeActivity.class));
+                            startActivity(new Intent(getContext(), HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                             getActivity().finish();
                             Toast.makeText(getContext(), "Info Saved", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {

@@ -3,13 +3,8 @@ package com.example.luhelpmate.Notice;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -24,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.luhelpmate.R;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,64 +37,78 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
-public class AddNoticeActivity extends AppCompatActivity implements View.OnClickListener {
+public class EditNotice extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView img, pdf;
-    private PhotoView noticeImg;
+    private PhotoView previewImg;
     private final int REQ = 1;
     private Bitmap bitmap;
     private Uri pdfData = null;
-    TextView pdfText;
-    String pdfName;
-    private EditText noticeTitle;
-    private Button updateButton;
-    private DatabaseReference databaseReference, dbRef;
+    private TextView pdfText;
+    private String pdfName;
+    private EditText title;
+    private String editTitle, editpdf, editImg, imgUrl = "", pdfUrl = "";
+    private Button update;
+    DatabaseReference reference, dbRef;
     private StorageReference storageReference;
-    String imgUrl = "";
-    String pdfUrl = "";
-    private ProgressDialog pd;
 
+    private ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_notice);
+        setContentView(R.layout.activity_edit_notice);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference().child("Notice");
         storageReference = FirebaseStorage.getInstance().getReference();
+        editTitle = getIntent().getStringExtra("title");
+        editpdf = getIntent().getStringExtra("pdf");
+        editImg = getIntent().getStringExtra("image");
 
         pd = new ProgressDialog(this);
         img = findViewById(R.id.img);
         pdf = findViewById(R.id.pdf);
         pdfText = findViewById(R.id.pdfName);
-        noticeTitle = findViewById(R.id.noticeTitle);
-        updateButton = findViewById(R.id.noticeUpdate);
-        noticeImg = findViewById(R.id.noticeImg);
+        title = findViewById(R.id.noticeTitle);
+        update = findViewById(R.id.update);
+        previewImg = findViewById(R.id.previewImg);
+
+        title.setText(editTitle);
+        Glide.with(this).load(editImg).into(previewImg);
+        if (!editpdf.equals("")) pdfText.setText(editpdf);
+        else pdfText.setText(editImg);
 
         img.setOnClickListener(this);
         pdf.setOnClickListener(this);
-        updateButton.setOnClickListener(this);
-
+        update.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+
         if (v.getId() == R.id.img) {
             openGallery();
-        } if (v.getId() == R.id.pdf) {
+        }
+        if (v.getId() == R.id.pdf) {
             openPdfDocument();
-        } if (v.getId() == R.id.noticeUpdate) {
+        }
+        if (v.getId() == R.id.update) {
 
-            if (noticeTitle.getText().toString().isEmpty()) {
-                noticeTitle.setError("Empty");
-                noticeTitle.requestFocus();
+            editTitle = title.getText().toString();
+            if (!editpdf.equals("")) editpdf = pdfText.getText().toString();
+            else editImg = pdfText.getText().toString();
+
+            if (editTitle.isEmpty()) {
+                title.setError("Empty");
+                title.requestFocus();
                 return;
-            } else if (bitmap == null && pdfData== null) {
+            } else if (bitmap == null && pdfData == null) {
                 pd.setMessage("Uploading...");
                 pd.show();
-                uploadData();
-            }
-            else if (bitmap == null){
+                if (!editpdf.equals("")) uploadData(editpdf);
+                else  uploadData(editImg);
+            } else if (bitmap == null) {
                 pd.setMessage("Uploading...");
                 pd.show();
                 uploadPdf();
@@ -111,7 +121,7 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void uploadPdf() {
-        StorageReference reference = storageReference.child("NoticePdf").child(pdfName + "-" + System.currentTimeMillis() + ".pdf");
+        StorageReference reference = storageReference.child("NoticePdf").child(pdfName);
         reference.putFile(pdfData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -119,7 +129,7 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
                 while (!uriTask.isSuccessful()) ;
                 Uri uri = uriTask.getResult();
                 pdfUrl = String.valueOf(uri);
-                uploadData();
+                uploadData(pdfUrl);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -136,7 +146,7 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
         final StorageReference filePath;
         filePath = storageReference.child("Notice").child(finalimg + "jpg");
         final UploadTask uploadTask = filePath.putBytes(finalimg);
-        uploadTask.addOnCompleteListener(AddNoticeActivity.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        uploadTask.addOnCompleteListener(EditNotice.this, new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -147,24 +157,21 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     imgUrl = String.valueOf(uri);
-                                    uploadData();
+                                    uploadData(imgUrl);
                                 }
                             });
                         }
                     });
                 } else {
                     pd.dismiss();
-                    Toast.makeText(AddNoticeActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    private void uploadData() {
-        dbRef = databaseReference.child("Notice");
-        final String uniqueKey = dbRef.push().getKey();
+    private void uploadData(String p) {
 
-        String title = noticeTitle.getText().toString();
         Calendar forDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yy");
         String date = currentDate.format(forDate.getTime());
@@ -173,45 +180,35 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
         SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
         String time = currentTime.format(forTime.getTime());
 
-        NoticeData noticeData = new NoticeData(title, imgUrl, pdfUrl, date, time, uniqueKey);
+        String uniqueKey = getIntent().getStringExtra("key");
 
-        dbRef.child(uniqueKey).setValue(noticeData).addOnSuccessListener(new OnSuccessListener<Void>() {
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("title", editTitle);
+        map.put("date", date);
+        map.put("time", time);
+        if (editpdf.equals("")) {
+            map.put("pdf", p);
+            map.put("image", "");
+        }
+        else {
+            map.put("image", p);
+            map.put("pdf", "");
+        }
+        map.put("key", uniqueKey);
+
+        reference.child(uniqueKey).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                pd.dismiss();
-                Toast.makeText(AddNoticeActivity.this, "Notice Uploaded", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), "Updated Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), NoticeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-
-                PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "Notice Notification")
-                        .setSmallIcon(R.drawable.splashicon)
-                        .setContentTitle("New Notice")
-                        .setContentText("Notice Title: " + title).setStyle(new NotificationCompat.BigTextStyle())
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setContentIntent(pendingIntent).setAutoCancel(true);
-
-                NotificationManager mNotificationManager = (NotificationManager)
-                        getSystemService(Context.NOTIFICATION_SERVICE);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    int importance = NotificationManager.IMPORTANCE_HIGH;
-                    NotificationChannel notificationChannel = new NotificationChannel("Notice Notification", "Notice Notification", importance);
-                    builder.setChannelId("Notice Notification");
-                    assert mNotificationManager != null;
-                    mNotificationManager.createNotificationChannel(notificationChannel);
-                }
-                assert mNotificationManager != null;
-                mNotificationManager.notify((int) System.currentTimeMillis(),
-                        builder.build());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
-                Toast.makeText(AddNoticeActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -231,6 +228,7 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == REQ && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             try {
@@ -238,8 +236,9 @@ public class AddNoticeActivity extends AppCompatActivity implements View.OnClick
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            noticeImg.setImageBitmap(bitmap);
+            previewImg.setImageBitmap(bitmap);
         }
+
         if (requestCode == REQ && resultCode == RESULT_OK) {
             pdfData = data.getData();
             if (pdfData.toString().startsWith("content://")) {

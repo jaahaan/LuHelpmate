@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.luhelpmate.Data.User;
+import com.example.luhelpmate.Faculty.FacultyEditActivity;
 import com.example.luhelpmate.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -111,7 +112,10 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
                                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
+                                                                Intent intent = new Intent(holder.itemView.getContext(), Menu.class);
+                                                                holder.itemView.getContext().startActivity(intent);
                                                                 Toast.makeText(holder.itemView.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+
                                                             }
                                                         })
                                                         .addOnFailureListener(new OnFailureListener() {

@@ -58,8 +58,14 @@ public class CourseViewPagerAdapter extends FragmentPagerAdapter {
                 Ninth_Fragment ninthFragment = new Ninth_Fragment();
                 return ninthFragment;
             case 9:
-                Tenth_Fragment tenth_fragment = new Tenth_Fragment();
-                return tenth_fragment;
+                Tenth_Fragment tenthFragment = new Tenth_Fragment();
+                return tenthFragment;
+            case 10:
+                Eleventh_Fragment eleventhFragment = new Eleventh_Fragment();
+                return eleventhFragment;
+            case 11:
+                Twelfth_Fragment twelfthFragment = new Twelfth_Fragment();
+                return twelfthFragment;
             default:
                 return null;
         }

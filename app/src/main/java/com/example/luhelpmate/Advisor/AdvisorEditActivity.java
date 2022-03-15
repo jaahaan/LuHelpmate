@@ -120,10 +120,10 @@ public class AdvisorEditActivity extends AppCompatActivity {
     }
 
     private void checkValidation() {
-        batch = Abatch.getText().toString();
-        section = Asection.getText().toString();
-        name1 = Aname1.getText().toString();
-        name2 = Aname2.getText().toString();
+        batch = Abatch.getText().toString().trim();
+        section = Asection.getText().toString().trim();
+        name1 = Aname1.getText().toString().trim();
+        name2 = Aname2.getText().toString().trim();
 
         if (batch.isEmpty()) {
             Abatch.setError("Empty");

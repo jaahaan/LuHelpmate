@@ -90,10 +90,10 @@ public class AddCourseActivity extends AppCompatActivity {
     }
 
     private void checkValidation() {
-        code = cCode.getText().toString();
-        title = cTitle.getText().toString();
-        credit = cCredit.getText().toString();
-        prerequisite = cPrerequisite.getText().toString();
+        code = cCode.getText().toString().trim();
+        title = cTitle.getText().toString().trim();
+        credit = cCredit.getText().toString().trim();
+        prerequisite = cPrerequisite.getText().toString().trim();
         if (code.isEmpty()) {
             cCode.setError("Enter Course Code");
             cCode.requestFocus();

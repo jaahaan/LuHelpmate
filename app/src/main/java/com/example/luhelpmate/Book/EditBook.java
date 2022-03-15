@@ -38,7 +38,7 @@ public class EditBook extends AppCompatActivity implements View.OnClickListener 
     private EditText bname, bauthor, bedition, bcode;
     TextView pdfText;
     String pdfName;
-    Pattern n = Pattern.compile("[\\D]*");
+    Pattern n = Pattern.compile("[\\D]+");
 
     private DatabaseReference databaseReference, dbRef;
     private StorageReference storageReference;

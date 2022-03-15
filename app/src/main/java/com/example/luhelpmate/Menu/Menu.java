@@ -16,13 +16,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.luhelpmate.Batch.BatchListActivity;
 import com.example.luhelpmate.Batch.BatchListUser;
-import com.example.luhelpmate.Faculty.FacultyEditActivity;
 import com.example.luhelpmate.Login.MainActivity;
+import com.example.luhelpmate.Login.ProvideInfo;
 import com.example.luhelpmate.Question.PreviousQuestionsActivity;
 import com.example.luhelpmate.R;
 import com.example.luhelpmate.Slider.SliderImagesActivity;
 import com.example.luhelpmate.TimeSlot.TimeSlotActivity;
-import com.example.luhelpmate.TimeSlot.TimeSlotData;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -34,6 +33,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Menu extends AppCompatActivity {
 
@@ -95,10 +97,36 @@ public class Menu extends AppCompatActivity {
                         sliderImages.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SliderImagesActivity.class)));
                         timeSlot.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), TimeSlotActivity.class)));
                         manageUser.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UserInfoActivity.class)));
-                    } else if (value.getString("admin").equals("2")) {
+                    } if (value.getString("admin").equals("2")) {
                         batchList.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), BatchListUser.class)));
                     }
+                    //For digits
+                    Pattern digit = Pattern.compile("[\\d]+");
+                    Matcher matcherDigit = digit.matcher(value.getString("initial"));
+                    if (value.getString("initial").equals("")){
+                        profile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(getApplicationContext(), ProvideInfo.class));
+                            }
+                        });
+                    }
+                    else if (matcherDigit.find()) {
+                        profile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(getApplicationContext(), EditProfileStudent.class));
+                            }
+                        });
 
+                    } else {
+                        profile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(getApplicationContext(), EditProfileTeacher.class));
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -110,12 +138,6 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), EditProfile.class));
-            }
-        });
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override

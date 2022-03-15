@@ -31,7 +31,7 @@ public class RoutineActivity extends AppCompatActivity{
 
     FloatingActionButton fab;
     FirebaseFirestore firestore;
-    private TextView session, year, updatedate ;
+    private TextView session, year ;
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -90,6 +90,7 @@ public class RoutineActivity extends AppCompatActivity{
 
         fab = findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
+
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(uid);
         df.addSnapshotListener(new EventListener<DocumentSnapshot>() {

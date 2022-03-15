@@ -15,7 +15,15 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.LUHelpMate">
-        <activity android:name=".Menu.EditProfile"></activity>
+        <activity android:name=".Notice.EditNotice"></activity>
+        <activity android:name=".Menu.EditProfileTeacher" />
+        <activity
+            android:name=".Menu.EditProfileStudent"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Menu.Menu" />
+        </activity>
         <activity
             android:name=".Routine.EditRoutineActivity"
             android:label="">
@@ -23,7 +31,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Routine.RoutineActivity" />
         </activity>
-        <activity android:name=".CourseOfferings.EditCourseOfferings" />
+        <activity
+            android:name=".CourseOfferings.EditCourseOfferings"
+            android:label="">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseOfferings.CourseOfferingsActivity" />
+        </activity>
         <activity
             android:name=".TimeSlot.TimeSlotActivity"
             android:label="">
@@ -31,7 +45,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Menu.Menu" />
         </activity>
-        <activity android:name=".CourseOfferings.CourseOfferingsActivity" />
+        <activity
+            android:name=".CourseOfferings.CourseOfferingsActivity"
+            android:label="Course Offerings">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
         <activity
             android:name=".Slider.AddSliderImage"
             android:label="">
@@ -123,7 +143,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Book.BookActivityAdmin" />
         </activity>
-        <activity android:name=".Admin.AddClubActivityAdmin" />
         <activity
             android:name=".Admin.ForgetPassword"
             android:label="Find Your Account" />
@@ -156,10 +175,10 @@
             android:label="Add Notice">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Notice.NoticeActivityAdmin" />
+                android:value=".Notice.NoticeActivity" />
         </activity>
         <activity
-            android:name=".Notice.NoticeActivityAdmin"
+            android:name=".Notice.NoticeActivity"
             android:label="">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

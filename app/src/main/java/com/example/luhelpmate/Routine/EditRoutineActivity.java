@@ -7,14 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.luhelpmate.CourseList.CourseList;
 import com.example.luhelpmate.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -35,8 +34,9 @@ import java.util.regex.Pattern;
 
 public class EditRoutineActivity extends AppCompatActivity {
 
-    private DatabaseReference dayRef, batchRef, codeRef, timeRef, initialRef, referenceT, referenceS, dbRef;
+    private DatabaseReference dayRef, batchRef, codeRef, timeRef, initialRef, roomRef, referenceT, referenceS, dbRef;
     private AutoCompleteTextView addDay, addTimeSlot, addDepartment, addInitial, addBatch, addSection, addCourseCode, addRoom;
+    private LinearLayout linearLayout;
     private ProgressDialog pd;
     private Button update;
     private String initial, day, timeSlot, department, batch, section, code, room;
@@ -52,6 +52,8 @@ public class EditRoutineActivity extends AppCompatActivity {
         batchRef = FirebaseDatabase.getInstance().getReference().child("Batch List");
         timeRef = FirebaseDatabase.getInstance().getReference().child("Time Slot");
         codeRef = FirebaseDatabase.getInstance().getReference().child("Course List");
+        roomRef = FirebaseDatabase.getInstance().getReference().child("Room");
+
         dayRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -107,6 +109,17 @@ public class EditRoutineActivity extends AppCompatActivity {
 
             }
         });
+        roomRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                searchRoom(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //For Autocomplete Suggestions
 
         referenceT = FirebaseDatabase.getInstance().getReference().child("Teacher Routine");
@@ -117,6 +130,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         addDay = findViewById(R.id.day);
         addTimeSlot = findViewById(R.id.timeSlot);
         addDepartment = findViewById(R.id.department);
+        linearLayout = findViewById(R.id.linear);
         addBatch = findViewById(R.id.batch);
         addSection = findViewById(R.id.section);
         addCourseCode = findViewById(R.id.code);
@@ -134,30 +148,55 @@ public class EditRoutineActivity extends AppCompatActivity {
         initial = getIntent().getStringExtra("initial");
         room = getIntent().getStringExtra("room");
 
-        //Setting exiting texts into AutocompleteTextView
-        addDay.setText(day);
-        addTimeSlot.setText(timeSlot);
-        addDepartment.setText(department);
-        addBatch.setText(batch);
-        addSection.setText(section);
-        addCourseCode.setText(code);
-        addInitial.setText(initial);
-        addRoom.setText(room);
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(uid);
+        df.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value != null && value.exists()) {
+                    //For digits
+                    Pattern digit = Pattern.compile("[\\d]+");
+                    Matcher matcherDigit = digit.matcher(value.getString("initial"));
+
+                    if (matcherDigit.find()) {
+                        linearLayout.setVisibility(View.GONE);
+                        //Setting exiting texts into AutocompleteTextView
+                        addDay.setText(day);
+                        addTimeSlot.setText(timeSlot);
+                        addDepartment.setText(department);
+                        addCourseCode.setText(code);
+                        addInitial.setText(initial);
+                        addRoom.setText(room);
+                    } else {
+                        addInitial.setVisibility(View.GONE);
+                        //Setting exiting texts into AutocompleteTextView
+                        addDay.setText(day);
+                        addTimeSlot.setText(timeSlot);
+                        addDepartment.setText(department);
+                        addBatch.setText(batch);
+                        addSection.setText(section);
+                        addCourseCode.setText(code);
+                        addRoom.setText(room);
+                    }
+                }
+            }
+        });
+
 
         update.setOnClickListener(v -> checkValidation());
 
     }
 
-
     private void checkValidation() {
-        day = addDay.getText().toString();
-        timeSlot = addTimeSlot.getText().toString();
-        department = addDepartment.getText().toString();
-        batch = addBatch.getText().toString();
-        section = addSection.getText().toString();
-        initial = addInitial.getText().toString();
-        code = addCourseCode.getText().toString();
-        room = addRoom.getText().toString();
+        day = addDay.getText().toString().trim();
+        timeSlot = addTimeSlot.getText().toString().trim();
+        department = addDepartment.getText().toString().trim();
+        batch = addBatch.getText().toString().trim();
+        section = addSection.getText().toString().trim();
+        initial = addInitial.getText().toString().trim();
+        code = addCourseCode.getText().toString().trim();
+        room = addRoom.getText().toString().trim();
 
         Pattern p = Pattern.compile("[a-z A-Z.]+");
         if (day.isEmpty()) {
@@ -200,19 +239,19 @@ public class EditRoutineActivity extends AppCompatActivity {
                 if (value != null && value.exists()) {
 
 
-                    Pattern d = Pattern.compile("[\\d]+");
-                    Pattern p = Pattern.compile("[A-Z]");
-                    Matcher dm = d.matcher(value.getString("initial"));
-                    Matcher pm = p.matcher(value.getString("initial"));
-                    if (dm.find()) {
-                        if (pm.find()) {
-                            dbRef = referenceS.child(batch).child(section).child(day);
+                    Pattern digit = Pattern.compile("[\\d]+");
+                    Pattern letter = Pattern.compile("[A-Z]");
+                    Matcher digitMatcher = digit.matcher(value.getString("initial"));
+                    Matcher letterMatcher = letter.matcher(value.getString("initial"));
+                    if (digitMatcher.find()) {
+                        if (letterMatcher.find()) {
+                            dbRef = referenceS.child(digitMatcher.group()).child(letterMatcher.group()).child(day);
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("day", day);
                             map.put("timeSlot", timeSlot);
                             map.put("department", department);
-                            map.put("batch", batch);
-                            map.put("section", section);
+                            map.put("batch", digitMatcher.group());
+                            map.put("section", letterMatcher.group());
                             map.put("initial", initial);
                             map.put("code", code);
                             map.put("room", room);
@@ -231,14 +270,14 @@ public class EditRoutineActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
                             });
                         } else {
-                            dbRef = referenceS.child(batch).child(day);
+                            dbRef = referenceS.child(digitMatcher.group()).child(day);
 
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("day", day);
-                            map.put("slot", timeSlot);
+                            map.put("timeSlot", timeSlot);
                             map.put("department", department);
-                            map.put("batch", batch);
-                            map.put("section", section);
+                            map.put("batch", digitMatcher.group());
+                            map.put("section", "");
                             map.put("initial", initial);
                             map.put("code", code);
                             map.put("room", room);
@@ -259,15 +298,15 @@ public class EditRoutineActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        dbRef = referenceT.child(initial).child(day);
+                        dbRef = referenceT.child(letterMatcher.group()).child(day);
 
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("day", day);
-                        map.put("slot", timeSlot);
+                        map.put("timeSlot", timeSlot);
                         map.put("department", department);
                         map.put("batch", batch);
                         map.put("section", section);
-                        map.put("initial", initial);
+                        map.put("initial", letterMatcher.group());
                         map.put("code", code);
                         map.put("room", room);
                         String uniqueKey = getIntent().getStringExtra("key");
@@ -276,7 +315,6 @@ public class EditRoutineActivity extends AppCompatActivity {
                         dbRef.child(uniqueKey).setValue(map).addOnSuccessListener(unused -> {
                             pd.dismiss();
                             Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                            //daySpinner.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, dayItems));
                             timeRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -288,7 +326,9 @@ public class EditRoutineActivity extends AppCompatActivity {
 
                                 }
                             });
-
+                            Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                         }).addOnFailureListener(e -> {
                             pd.dismiss();
                             Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
@@ -307,7 +347,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         ArrayList<String> day = new ArrayList<>();
         if (snapshot.exists()) {
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                String dayData = dataSnapshot.child("time").getValue(String.class);
+                String dayData = dataSnapshot.child("day").getValue(String.class);
                 day.add(dayData);
             }
             ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, day);
@@ -368,4 +408,18 @@ public class EditRoutineActivity extends AppCompatActivity {
             addBatch.setThreshold(1);
         }
     }
+
+    private void searchRoom(DataSnapshot snapshot) {
+        ArrayList<String> room = new ArrayList<>();
+        if (snapshot.exists()) {
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                String roomData = dataSnapshot.child("room").getValue(String.class);
+                room.add(roomData);
+            }
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, room);
+            addRoom.setAdapter(arrayAdapter);
+            addRoom.setThreshold(1);
+        }
+    }
+
 }

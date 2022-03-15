@@ -30,7 +30,7 @@
             <TextView
                 android:id="@+id/dept"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_toEndOf="@+id/icon"
                 android:paddingTop="10dp"
@@ -42,10 +42,11 @@
             <TextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_toLeftOf="@+id/date"
-                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:text="@string/session"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@color/floralWhite" />
@@ -53,10 +54,11 @@
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:paddingRight="10dp"
                 android:text="-year"
                 android:textAppearance="?android:textAppearanceSmall"
@@ -81,7 +83,7 @@
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="3dp"
                 app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="@color/paleSilver"
+                app:sliderIndicatorSelectedColor="@color/flame_200"
                 app:sliderIndicatorUnselectedColor="@color/floralWhite"
                 app:sliderScrollTimeInSec="2"
                 app:sliderStartAutoCycle="true" />
@@ -97,13 +99,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -112,11 +114,8 @@
                     android:id="@+id/routine"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -127,13 +126,15 @@
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp"
+                       >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
+                            android:layout_marginBottom="5dp"
                             android:src="@drawable/routine_icon" />
 
                         <View
@@ -152,11 +153,8 @@
                     android:id="@+id/courseOffering"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -167,14 +165,16 @@
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="5dp"
+                        >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
-                            android:src="@drawable/notes_icon" />
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/course_offerings_icon" />
 
                         <View
                             android:layout_width="match_parent"
@@ -188,16 +188,21 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/faculty"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
                     android:layout_weight="1"
+                    android:layout_margin="10dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
@@ -208,13 +213,15 @@
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp"
+                        >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
+                            android:layout_marginBottom="5dp"
                             android:src="@drawable/people_icon" />
 
                         <View
@@ -229,15 +236,11 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cr"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
@@ -250,13 +253,15 @@
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp"
+                        >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
+                            android:layout_marginBottom="5dp"
                             android:src="@drawable/people_icon" />
 
                         <View
@@ -275,61 +280,17 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:gravity="center"
                 android:orientation="horizontal">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/books"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground">
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/paleSilver"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:background="@drawable/circleblack"
-                            android:padding="5dp"
-                            android:src="@drawable/book_icon" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_margin="5dp"
-                            android:background="@color/blackOlive_500" />
-
-                        <TextView
-                            style="@style/cardText"
-                            android:text="@string/books" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
 
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/advisor"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
@@ -342,14 +303,16 @@
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp"
+                        >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
-                            android:src="@drawable/questions_icon" />
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/list_icon" />
 
 
                         <View
@@ -369,10 +332,7 @@
                     android:id="@+id/courseList"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
@@ -385,13 +345,15 @@
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp"
+                        >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
+                            android:layout_marginBottom="5dp"
                             android:src="@drawable/list_icon" />
 
                         <View
@@ -406,34 +368,79 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/notice"
+                    android:id="@+id/books"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground">
 
                     <LinearLayout
-
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/paleSilver"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="5dp">
+                        android:padding="10dp"
+                        >
 
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:background="@drawable/circleblack"
                             android:padding="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:src="@drawable/book_icon" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="5dp"
+                            android:background="@color/blackOlive_500" />
+
+                        <TextView
+                            style="@style/cardText"
+                            android:text="@string/books" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/notice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/paleSilver"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/circleblack"
+                            android:padding="5dp"
+                            android:layout_marginBottom="5dp"
                             android:src="@drawable/notice_icon" />
 
                         <View
@@ -449,216 +456,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/club"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="@string/clubs"
-                android:textAppearance="?android:textAppearanceLarge" />
-
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:scrollbars="none">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="6dp"
-                    app:cardUseCompatPadding="true">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/paleSilver"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/lucc"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="LUCC"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ieee"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="IEEE"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/lups"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="LUPS"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/lumuna"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="LUMUNA"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/lussc"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="LUSSC"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/lusc"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="LUSC"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/luoc"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Orpheus"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/lubc"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:src="@drawable/download" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="BC"
-                                android:textAppearance="?android:textAppearanceSmall" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </HorizontalScrollView>
-
 
         </LinearLayout>
 

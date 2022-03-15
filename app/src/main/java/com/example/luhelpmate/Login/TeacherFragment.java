@@ -194,7 +194,7 @@ public class TeacherFragment extends Fragment {
                     userInfo.put("admin", "2");
                     userInfo.put("uid", user.getUid());
                     df.set(userInfo);
-                    startActivity(new Intent(getContext(), HomeActivity.class));
+                    startActivity(new Intent(getContext(), HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     getActivity().finish();
                     Toast.makeText(getContext(), "Info Saved", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {

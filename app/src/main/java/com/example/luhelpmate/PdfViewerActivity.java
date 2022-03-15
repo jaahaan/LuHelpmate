@@ -62,32 +62,14 @@ public class PdfViewerActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.download_share, menu);
+        getMenuInflater().inflate(R.menu.download, menu);
         MenuItem download = menu.findItem(R.id.download);
-        MenuItem share = menu.findItem(R.id.share);
 
         download.setOnMenuItemClickListener(item -> {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
             return true;
-        });
-
-        share.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                try {
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setType("application/pdf");
-                    //shareIntent.putExtra(Intent.EXTRA_SUBJECT, "LU");
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, url + getApplicationContext().getPackageName());
-
-                    startActivity(Intent.createChooser(shareIntent, "Share With"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return true;
-            }
         });
 
         return super.onCreateOptionsMenu(menu);

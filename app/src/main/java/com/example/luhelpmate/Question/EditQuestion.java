@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.luhelpmate.R;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,8 +49,8 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
     private final int REQ = 1;
     private Bitmap bitmap;
     private Uri pdfData = null;
-    TextView pdfText;
-    String pdfName;
+    private TextView pdfText;
+    private String pdfName;
     private AutoCompleteTextView exam, session, code, title, initial;
     private String editExam, editSession, editCode, editTitle, editInitial, editpdf, editImg, imgUrl = "", pdfUrl = "";
 
@@ -131,6 +132,7 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
         code.setText(editCode);
         title.setText(editTitle);
         initial.setText(editInitial);
+        Glide.with(this).load(editImg).into(previewImg);
         if (!editpdf.equals("")) pdfText.setText(editpdf);
         else pdfText.setText(editImg);
 
@@ -203,27 +205,27 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
         }
         if (v.getId() == R.id.update) {
 
-            editExam = exam.getText().toString();
-            editSession = session.getText().toString();
-            editCode = code.getText().toString();
-            editTitle = title.getText().toString();
-            editInitial = initial.getText().toString();
+            editExam = exam.getText().toString().trim();
+            editSession = session.getText().toString().trim();
+            editCode = code.getText().toString().trim();
+            editTitle = title.getText().toString().trim();
+            editInitial = initial.getText().toString().trim();
             if (!editpdf.equals("")) editpdf = pdfText.getText().toString();
             else editImg = pdfText.getText().toString();
 
-            if (exam.getText().toString().isEmpty()) {
+            if (editExam.isEmpty()) {
                 exam.setError("Empty");
                 exam.requestFocus();
                 return;
-            } else if (session.getText().toString().isEmpty()) {
+            } else if (editSession.isEmpty()) {
                 session.setError("Empty");
                 session.requestFocus();
                 return;
-            } else if (code.getText().toString().isEmpty()) {
+            } else if (editCode.isEmpty()) {
                 code.setError("Empty");
                 code.requestFocus();
                 return;
-            } else if (title.getText().toString().isEmpty()) {
+            } else if (editTitle.isEmpty()) {
                 title.setError("Empty");
                 title.requestFocus();
                 return;
@@ -231,7 +233,7 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
                 pd.setMessage("Uploading...");
                 pd.show();
                 if (!editpdf.equals("")) uploadData(editpdf);
-                else uploadData(editImg);
+                else  uploadData(editImg);
             } else if (bitmap == null) {
                 pd.setMessage("Uploading...");
                 pd.show();
@@ -304,8 +306,14 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
         map.put("title", editTitle);
         map.put("code", editCode);
         map.put("initial", editInitial);
-        if (!editpdf.equals("")) map.put("pdf", p);
-        else map.put("img", p);
+        if (editpdf.equals("")) {
+            map.put("pdf", p);
+            map.put("image", "");
+        }
+        else {
+            map.put("image", p);
+            map.put("pdf", "");
+        }
 
         map.put("key", uniqueKey);
         reference.child(uniqueKey).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -339,9 +347,18 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == REQ && resultCode == RESULT_OK) {
             Uri uri = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            previewImg.setImageBitmap(bitmap);
+        }
 
+        if (requestCode == REQ && resultCode == RESULT_OK) {
             pdfData = data.getData();
             if (pdfData.toString().startsWith("content://")) {
                 Cursor cursor = null;
@@ -356,15 +373,6 @@ public class EditQuestion extends AppCompatActivity implements View.OnClickListe
             } else if (pdfData.toString().startsWith("file://")) {
                 pdfName = new File(pdfData.toString()).getName();
             }
-            else {
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            previewImg.setImageBitmap(bitmap);
-
             pdfText.setText(pdfName);
         }
     }

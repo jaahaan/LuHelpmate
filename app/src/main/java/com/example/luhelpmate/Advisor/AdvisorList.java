@@ -75,7 +75,7 @@ public class AdvisorList extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yy");
         String date = currentDate.format(forDate.getTime());
 
-        DocumentReference df1 = firestore.collection("Advisor Updated").document("Advisor Updated");
+        DocumentReference df1 = firestore.collection("Last Updated").document("Advisor Updated");
 
         df1.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -130,12 +130,12 @@ public class AdvisorList extends AppCompatActivity {
                         linearLayout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                DocumentReference df = firestore.collection("Advisor Updated").document("Advisor Updated");
+                                DocumentReference df = firestore.collection("Last Updated").document("Advisor Updated");
 
                                 df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot value) {
-                                        DocumentReference df = firestore.collection("Advisor Updated").document("Advisor Updated");
+                                        DocumentReference df = firestore.collection("Last Updated").document("Advisor Updated");
                                         Map<String, String> userInfo = new HashMap<>();
                                         userInfo.put("date", date);
                                         df.set(userInfo);

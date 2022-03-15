@@ -1,18 +1,17 @@
 package com.example.luhelpmate.CourseOfferings;
 
 public class CourseOfferingsData {
-    private String code, title, credit, prerequisite, semester, batch, initial, key;
+    private String code, title, credit, prerequisite, semester, initial, key;
 
     CourseOfferingsData() {
     }
 
-    public CourseOfferingsData(String code, String title, String credit, String prerequisite, String semester, String batch, String initial, String key) {
+    public CourseOfferingsData(String code, String title, String credit, String prerequisite, String semester, String initial, String key) {
         this.code = code;
         this.title = title;
         this.credit = credit;
         this.prerequisite = prerequisite;
         this.semester = semester;
-        this.batch = batch;
         this.initial = initial;
         this.key = key;
     }
@@ -55,14 +54,6 @@ public class CourseOfferingsData {
 
     public void setSemester(String semester) {
         this.semester = semester;
-    }
-
-    public String getBatch() {
-        return batch;
-    }
-
-    public void setBatch(String batch) {
-        this.batch = batch;
     }
 
     public String getInitial() {

@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -35,9 +36,10 @@ import java.util.regex.Pattern;
 
 public class Make_Routine extends AppCompatActivity {
 
-    private DatabaseReference dayRef, batchRef, codeRef, timeRef, initialRef, referenceT, referenceS, dbRef;
+    private DatabaseReference dayRef, batchRef, codeRef, timeRef, initialRef, roomRef, referenceT, referenceS, dbRef;
     private AutoCompleteTextView addInitial, addBatch, addSection, addCourseCode, addRoom;
     private Spinner daySpinner, timeSlotSpinner, departmentSpinner;
+    private LinearLayout linearLayout;
     private Button update;
     private String initial, day, timeSlot, department, batch, section, code, room;
     String[] deptItems = new String[]{"Select Department", "CSE", "EEE", "ARCHI", "CE", "BuA", "ENG", "LAW", "IS", "BNG", "THM", "PH"};
@@ -50,63 +52,17 @@ public class Make_Routine extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.make_routine);
 
+        pd = new ProgressDialog(this);
+        referenceT = FirebaseDatabase.getInstance().getReference().child("Teacher Routine");
+        referenceS = FirebaseDatabase.getInstance().getReference().child("Student Routine");
+
+        //For Autocomplete Suggestions
         dayRef = FirebaseDatabase.getInstance().getReference().child("Day");
         initialRef = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
         batchRef = FirebaseDatabase.getInstance().getReference().child("Batch List");
         timeRef = FirebaseDatabase.getInstance().getReference().child("Time Slot");
         codeRef = FirebaseDatabase.getInstance().getReference().child("Course List");
-        referenceT = FirebaseDatabase.getInstance().getReference().child("Teacher Routine");
-        referenceS = FirebaseDatabase.getInstance().getReference().child("Student Routine");
-
-        pd = new ProgressDialog(this);
-
-        addInitial = findViewById(R.id.teacherInitial);
-        daySpinner = findViewById(R.id.day);
-        timeSlotSpinner = findViewById(R.id.timeSlot);
-        departmentSpinner = findViewById(R.id.department);
-        addBatch = findViewById(R.id.batch);
-        addSection = findViewById(R.id.section);
-        addCourseCode = findViewById(R.id.code);
-        addRoom = findViewById(R.id.room);
-        progressBar = findViewById(R.id.progressBar);
-        update = findViewById(R.id.update);
-
-        timeSlotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                timeSlot = timeSlotSpinner.getSelectedItem().toString();
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                day = daySpinner.getSelectedItem().toString();
-                progressBar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-        departmentSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, deptItems));
-        departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                department = departmentSpinner.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        update.setOnClickListener(v -> checkValidation());
+        roomRef = FirebaseDatabase.getInstance().getReference().child("Room");
 
         dayRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -163,7 +119,99 @@ public class Make_Routine extends AppCompatActivity {
 
             }
         });
+        roomRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                searchRoom(snapshot);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        addInitial = findViewById(R.id.teacherInitial);
+        daySpinner = findViewById(R.id.day);
+        timeSlotSpinner = findViewById(R.id.timeSlot);
+        departmentSpinner = findViewById(R.id.department);
+        linearLayout = findViewById(R.id.linear);
+        addBatch = findViewById(R.id.batch);
+        addSection = findViewById(R.id.section);
+        addCourseCode = findViewById(R.id.code);
+        addRoom = findViewById(R.id.room);
+        progressBar = findViewById(R.id.progressBar);
+        update = findViewById(R.id.update);
+
+        timeSlotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                timeSlot = timeSlotSpinner.getSelectedItem().toString();
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                day = daySpinner.getSelectedItem().toString();
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        departmentSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, deptItems));
+        departmentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                department = departmentSpinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(uid);
+        df.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value != null && value.exists()) {
+                    //For digits
+                    Pattern digit = Pattern.compile("[\\d]+");
+                    Matcher matcherDigit = digit.matcher(value.getString("initial"));
+
+                    if (matcherDigit.find()) {
+                        linearLayout.setVisibility(View.GONE);
+                    } else {
+                        addInitial.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
+
+        update.setOnClickListener(v -> uploadData());
+
+    }
+
+    private void searchRoom(DataSnapshot snapshot) {
+        ArrayList<String> room = new ArrayList<>();
+        if (snapshot.exists()) {
+            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                String roomData = dataSnapshot.child("room").getValue(String.class);
+                room.add(roomData);
+            }
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, room);
+            addRoom.setAdapter(arrayAdapter);
+            addRoom.setThreshold(1);
+        }
     }
 
     private void searchDay(DataSnapshot snapshot) {
@@ -230,43 +278,6 @@ public class Make_Routine extends AppCompatActivity {
         }
     }
 
-    private void checkValidation() {
-        initial = addInitial.getText().toString();
-        batch = addBatch.getText().toString();
-        section = addSection.getText().toString();
-        code = addCourseCode.getText().toString();
-        room = addRoom.getText().toString();
-        Pattern p = Pattern.compile("[a-z A-Z.]+");
-        if (initial.isEmpty()) {
-            addInitial.setError("Enter Semester");
-            addInitial.requestFocus();
-        } else if (!p.matcher(initial).matches()) {
-            addInitial.setError("Initial can be only Alphabet");
-            addInitial.requestFocus();
-        } else if (day.equals("Day")) {
-            Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (timeSlot.equals("Time Slots")) {
-            Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (department.equals("Select Department")) {
-            Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
-            return;
-        } else if (batch.isEmpty()) {
-            addBatch.setError("Enter batch");
-            addBatch.requestFocus();
-        } else if (code.isEmpty()) {
-            addCourseCode.setError("Enter Course Code");
-            addCourseCode.requestFocus();
-        } else if (room.isEmpty()) {
-            addRoom.setError("Enter Room");
-            addRoom.requestFocus();
-        } else {
-            pd.setMessage("Updating...");
-            pd.show();
-            uploadData();
-        }
-    }
 
     private void uploadData() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -275,18 +286,130 @@ public class Make_Routine extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
+                    initial = addInitial.getText().toString().trim();
+                    batch = addBatch.getText().toString().trim();
+                    section = addSection.getText().toString().trim();
+                    code = addCourseCode.getText().toString().trim();
+                    room = addRoom.getText().toString().trim();
                     //For digits
                     Pattern digit = Pattern.compile("[\\d]+");
                     Matcher matcherDigit = digit.matcher(value.getString("initial"));
 
                     //For Alphabet
-                    Pattern letter = Pattern.compile("[A-Z]");
+                    Pattern letter = Pattern.compile("[A-Z]+");
                     Matcher matcherLetter = letter.matcher(value.getString("initial"));
+                    Pattern p = Pattern.compile("[a-z A-Z.]+");
+
                     if (matcherDigit.find()) {
                         if (matcherLetter.find()) {
-                            dbRef = referenceS.child(batch).child(section).child(day);
+                            if (day.equals("Day")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (timeSlot.equals("Time Slots")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (department.equals("Select Department")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
+                                return;
+                            } if (initial.isEmpty()) {
+                                addInitial.setError("Enter Initial");
+                                addInitial.requestFocus();
+                            } else if (!p.matcher(initial).matches()) {
+                                addInitial.setError("Initial can be only Alphabet");
+                                addInitial.requestFocus();
+                            } else if (code.isEmpty()) {
+                                addCourseCode.setError("Enter Course Code");
+                                addCourseCode.requestFocus();
+                            } else if (room.isEmpty()) {
+                                addRoom.setError("Enter Room");
+                                addRoom.requestFocus();
+                            } else {
+                                pd.setMessage("Updating...");
+                                pd.show();
+                                dbRef = referenceS.child(matcherDigit.group()).child(matcherLetter.group()).child(day);
+                                final String uniqueKey = dbRef.push().getKey();
+                                RoutineData data = new RoutineData(initial, day, timeSlot, department, matcherDigit.group(), matcherLetter.group(), code, room, uniqueKey);
+                                dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                    timeRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            searchTime(snapshot);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
+                                    addInitial.setText("");
+                                    addCourseCode.setText("");
+                                    addRoom.setText("");
+                                }).addOnFailureListener(e -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        } else {
+                            if (day.equals("Day")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (timeSlot.equals("Time Slots")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (department.equals("Select Department")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (initial.isEmpty()) {
+                                addInitial.setError("Enter Initial");
+                                addInitial.requestFocus();
+                            } else if (!p.matcher(initial).matches()) {
+                                addInitial.setError("Initial can be only Alphabet");
+                                addInitial.requestFocus();
+                            } else if (code.isEmpty()) {
+                                addCourseCode.setError("Enter Course Code");
+                                addCourseCode.requestFocus();
+                            } else if (room.isEmpty()) {
+                                addRoom.setError("Enter Room");
+                                addRoom.requestFocus();
+                            } else {
+                                dbRef = referenceS.child(matcherDigit.group()).child(day);
+
+                                final String uniqueKey = dbRef.push().getKey();
+                                RoutineData data = new RoutineData(initial, day, timeSlot, department, matcherDigit.group(), "", code, room, uniqueKey);
+                                dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                    addInitial.setText("");
+                                    addCourseCode.setText("");
+                                    addRoom.setText("");
+                                }).addOnFailureListener(e -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        }
+                    } else {
+                        if (day.equals("Day")) {
+                            Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (timeSlot.equals("Time Slots")) {
+                            Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (department.equals("Select Department")) {
+                            Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (code.isEmpty()) {
+                            addCourseCode.setError("Enter Course Code");
+                            addCourseCode.requestFocus();
+                        } else if (room.isEmpty()) {
+                            addRoom.setError("Enter Room");
+                            addRoom.requestFocus();
+                        } else if (matcherLetter.find()){
+                            dbRef = referenceT.child(matcherLetter.group()).child(day);
                             final String uniqueKey = dbRef.push().getKey();
-                            RoutineData data = new RoutineData(initial, day, timeSlot, department, batch, section, code, room, uniqueKey);
+                            RoutineData data = new RoutineData(matcherLetter.group(), day, timeSlot, department, batch, section, code, room, uniqueKey);
                             dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
                                 pd.dismiss();
                                 Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
@@ -301,23 +424,9 @@ public class Make_Routine extends AppCompatActivity {
 
                                     }
                                 });
-                                addInitial.setText("");
-                                addCourseCode.setText("");
-                                addRoom.setText("");
-                            }).addOnFailureListener(e -> {
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                            });
-
-                        } else {
-                            dbRef = referenceS.child(batch).child(day);
-
-                            final String uniqueKey = dbRef.push().getKey();
-                            RoutineData data = new RoutineData(initial, day, timeSlot, department, batch, section, code, room, uniqueKey);
-                            dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                                addInitial.setText("");
+                                departmentSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, deptItems));
+                                addBatch.setText("");
+                                addSection.setText("");
                                 addCourseCode.setText("");
                                 addRoom.setText("");
                             }).addOnFailureListener(e -> {
@@ -325,33 +434,6 @@ public class Make_Routine extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
                             });
                         }
-                    } else {
-                        dbRef = referenceT.child(initial).child(day);
-                        final String uniqueKey = dbRef.push().getKey();
-                        RoutineData data = new RoutineData(initial, day, timeSlot, department, batch, section, code, room, uniqueKey);
-                        dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
-                            pd.dismiss();
-                            Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                            timeRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    searchTime(snapshot);
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                            departmentSpinner.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, deptItems));
-                            addBatch.setText("");
-                            addSection.setText("");
-                            addCourseCode.setText("");
-                            addRoom.setText("");
-                        }).addOnFailureListener(e -> {
-                            pd.dismiss();
-                            Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                        });
                     }
                 }
             }

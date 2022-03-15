@@ -86,11 +86,7 @@ public class CourseOfferingAdapter extends RecyclerView.Adapter<CourseOfferingAd
                                             Intent intent = new Intent(holder.itemView.getContext(), EditCourseOfferings.class);
 
                                             intent.putExtra("semester", model.getSemester());
-                                            intent.putExtra("batch", model.getBatch());
                                             intent.putExtra("code", model.getCode());
-                                            intent.putExtra("title", model.getTitle());
-                                            intent.putExtra("credit", model.getCredit());
-                                            intent.putExtra("prerequisite", model.getPrerequisite());
                                             intent.putExtra("initial", model.getInitial());
                                             intent.putExtra("key", model.getKey());
                                             holder.itemView.getContext().startActivity(intent);
@@ -101,7 +97,6 @@ public class CourseOfferingAdapter extends RecyclerView.Adapter<CourseOfferingAd
                                             builder.setTitle("Are You Sure?");
                                             builder.setPositiveButton("Delete", (dialog, which) -> {
                                                 FirebaseDatabase.getInstance().getReference().child("Course Offerings").child(model.getSemester()).child(model.getKey()).removeValue();
-                                                //FirebaseStorage.getInstance().getReference("Faculty").child(model.getImage()).delete();
                                                 Toast.makeText(holder.itemView.getContext(), "Deleted", Toast.LENGTH_SHORT).show();
                                             });
                                             builder.setNegativeButton("Cancel", (dialog, which) -> Toast.makeText(holder.itemView.getContext(), "Cancelled", Toast.LENGTH_SHORT).show());

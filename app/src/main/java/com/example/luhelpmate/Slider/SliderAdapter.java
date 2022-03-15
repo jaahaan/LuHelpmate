@@ -34,7 +34,6 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder> {
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         SliderData model = list.get(position);
-
         Glide.with(holder.image).load(model.getImage()).placeholder(R.drawable.image_icon).error(R.drawable.image_icon).into(holder.image);
 
     }

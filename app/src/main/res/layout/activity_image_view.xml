@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageViewActivity">
+
+
+    <TextView
+        android:id="@+id/nTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="@color/floralWhite"
+        android:background="@color/flame_500"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textStyle="bold"
+        tools:text="Title" />
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/nImage"
+        android:layout_below="@+id/nTitle"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible" />
+
+</RelativeLayout>
