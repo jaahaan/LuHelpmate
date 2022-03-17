@@ -18,7 +18,6 @@ import com.example.luhelpmate.Batch.BatchListActivity;
 import com.example.luhelpmate.Batch.BatchListUser;
 import com.example.luhelpmate.Login.MainActivity;
 import com.example.luhelpmate.Login.ProvideInfo;
-import com.example.luhelpmate.Question.PreviousQuestionsActivity;
 import com.example.luhelpmate.R;
 import com.example.luhelpmate.Slider.SliderImagesActivity;
 import com.example.luhelpmate.TimeSlot.TimeSlotActivity;
@@ -40,7 +39,7 @@ import java.util.regex.Pattern;
 public class Menu extends AppCompatActivity {
 
     private ImageView image;
-    private TextView name, initial, designation, email, admin, previousQuestion, batchList, sliderImages, timeSlot, manageUser, signOut, share;
+    private TextView name, initial, designation, email, admin, batchList, sliderImages, timeSlot, manageUser, signOut, share;
     private CardView profile;
 
     @Override
@@ -58,7 +57,6 @@ public class Menu extends AppCompatActivity {
         admin = findViewById(R.id.admin);
         admin.setVisibility(View.GONE);
 
-        previousQuestion = findViewById(R.id.previousQuestion);
         batchList = findViewById(R.id.batchList);
         sliderImages = findViewById(R.id.sliderImages);
         timeSlot = findViewById(R.id.timeSlot);
@@ -68,7 +66,6 @@ public class Menu extends AppCompatActivity {
         manageUser.setVisibility(View.GONE);
         sliderImages.setVisibility(View.GONE);
         timeSlot.setVisibility(View.GONE);
-        previousQuestion.setVisibility(View.GONE);
         batchList.setVisibility(View.GONE);
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
@@ -91,7 +88,6 @@ public class Menu extends AppCompatActivity {
                         manageUser.setVisibility(View.VISIBLE);
                         sliderImages.setVisibility(View.VISIBLE);
                         timeSlot.setVisibility(View.VISIBLE);
-                        previousQuestion.setVisibility(View.VISIBLE);
                         batchList.setVisibility(View.VISIBLE);
                         batchList.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), BatchListActivity.class)));
                         sliderImages.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), SliderImagesActivity.class)));
@@ -130,14 +126,6 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
-
-        previousQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), PreviousQuestionsActivity.class));
-            }
-        });
-
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override

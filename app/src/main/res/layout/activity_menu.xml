@@ -116,21 +116,6 @@
             android:background="@color/bgOpacity1" />
 
         <TextView
-            android:id="@+id/previousQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="18dp"
-            android:text="@string/previous_questions"
-            android:textAppearance="?android:textAppearanceMedium" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            android:background="@color/bgOpacity1" />
-
-        <TextView
             android:id="@+id/batchList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

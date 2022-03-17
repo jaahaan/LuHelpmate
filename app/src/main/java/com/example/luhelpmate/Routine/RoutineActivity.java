@@ -29,12 +29,12 @@ import java.util.regex.Pattern;
 
 public class RoutineActivity extends AppCompatActivity{
 
-    FloatingActionButton fab;
-    FirebaseFirestore firestore;
+    private FloatingActionButton fab;
+    private FirebaseFirestore firestore;
     private TextView session, year ;
-
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private RoutineViewPagerAdapter adapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class RoutineActivity extends AppCompatActivity{
             }
         });
 
-        final RoutineViewPagerAdapter adapter = new RoutineViewPagerAdapter(getSupportFragmentManager(), this, tabLayout.getTabCount());
+        adapter = new RoutineViewPagerAdapter(getSupportFragmentManager(), this, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -100,17 +100,22 @@ public class RoutineActivity extends AppCompatActivity{
                     if (value.getString("admin").equals("1")){
                         fab.setVisibility(View.VISIBLE);
                     } else {
-                        Pattern p = Pattern.compile("[\\d]+");
-                        Matcher m = p.matcher(value.getString("initial"));
-                        if (m.find()) {
+                        Pattern digit = Pattern.compile("[\\d]+");
+                        Matcher matcherDigit = digit.matcher(value.getString("initial"));
+
+                        //For Alphabet
+                        Pattern letter = Pattern.compile("[A-Z]+");
+                        Matcher matcherLetter = letter.matcher(value.getString("initial"));
+                        if (matcherDigit.find()) {
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Cr Info");
                             reference.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.exists()) {
                                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                            String data = dataSnapshot.child("email").getValue(String.class);
-                                            if (value.getString("email").equals(data)) {
+                                            String emailData = dataSnapshot.child("email").getValue(String.class);
+                                            String batchData = dataSnapshot.child("batch").getValue(String.class);
+                                            if (value.getString("email").equals(emailData)) {
                                                 fab.setVisibility(View.VISIBLE);
                                             } else {
                                                 fab.setVisibility(View.GONE);

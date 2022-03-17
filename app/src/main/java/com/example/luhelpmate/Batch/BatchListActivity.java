@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BatchListActivity extends AppCompatActivity {
+public class BatchListActivity extends AppCompatActivity{
 
     private EditText addBatch, addSection;
     private Button add;
@@ -115,18 +115,17 @@ public class BatchListActivity extends AppCompatActivity {
     }
 
     private void uploadData() {
-        dbRef = reference;
-        final String uniqueKey = dbRef.push().getKey();
+        final String uniqueKey = reference.push().getKey();
 
         BatchData batchData = new BatchData(batch, section, uniqueKey);
 
-        dbRef.child(batch).setValue(batchData).addOnSuccessListener(unused -> {
+        reference.child(batch).setValue(batchData).addOnSuccessListener(unused -> {
             pd.dismiss();
             Toast.makeText(BatchListActivity.this, "Added", Toast.LENGTH_SHORT).show();
             addBatch.setText("");
             addSection.setText("");
 
-            Intent intent = new Intent(this, BatchListActivity.class);
+            /**Intent intent = new Intent(this, BatchListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
@@ -149,7 +148,7 @@ public class BatchListActivity extends AppCompatActivity {
             }
             assert mNotificationManager != null;
             mNotificationManager.notify(( int ) System. currentTimeMillis () ,
-                    builder.build()) ;
+                    builder.build()) ;*/
 
         }).addOnFailureListener(e -> {
             pd.dismiss();

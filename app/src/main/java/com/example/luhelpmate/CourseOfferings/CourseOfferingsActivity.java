@@ -1,8 +1,11 @@
 package com.example.luhelpmate.CourseOfferings;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.NotificationChannel;
@@ -11,22 +14,32 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luhelpmate.Advisor.AdvisorList;
+import com.example.luhelpmate.Book.BookAdapter;
+import com.example.luhelpmate.Book.BookData;
 import com.example.luhelpmate.R;
 import com.example.luhelpmate.Routine.RoutineViewPagerAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -37,6 +50,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -182,6 +196,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
             }
         });
         fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OfferCourse.class)));
+
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.download, menu);
@@ -189,8 +204,8 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         download.setOnMenuItemClickListener(item -> {
             try{
-                String s="id, batch, section\n250, 50, F\n260, 53, E\n255, 50, C\n";
-                saveFile("test","test1",s,CourseOfferingsActivity.this);
+                String fileText=retreaveDataFromServer();
+                saveFile("test","test1",fileText,CourseOfferingsActivity.this);
                 String savedString = "";
                 savedString = readFile("test","test1",CourseOfferingsActivity.this);
                 Log.v("stdntLst",savedString);
@@ -205,10 +220,74 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+    private String retreaveDataFromServer(){
+        String s="id, batch, section\n250, 50, F\n260, 53, E\n255, 50, C\n";
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Course Offerings").child("10th");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (!snapshot.exists()) {
+
+                } else {
+
+                    for(DataSnapshot snapshot1: snapshot.getChildren()){
+                        for(DataSnapshot snapshot2: snapshot1.getChildren()){
+                            if(stringCompare(snapshot2.getKey().toString(),"code")){
+
+                            }
+                            else if(stringCompare(snapshot2.getKey().toString(),"credit")){
+
+                            }
+                            else if(stringCompare(snapshot2.getKey().toString(),"initial")){
+
+                            }
+                            else if(stringCompare(snapshot2.getKey().toString(),"prerequisite")){
+
+                            }
+                            else if(stringCompare(snapshot2.getKey().toString(),"semester")){
+
+                            }
+                            else if(stringCompare(snapshot2.getKey().toString(),"title")){
+
+                            }
+
+
+                            Log.e("stdntLst2",snapshot2.getKey().toString()+"__"+snapshot2.getValue().toString());
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        return s;
+    }
+    private boolean stringCompare(String s, String s2){
+        if(s.length()==s2.length()){
+            int flg=0;
+            for(int j=0;j<s.length();j++){
+                if(s.charAt(j)!=s2.charAt(j)){
+                    flg=1;
+                    break;
+                }
+            }
+            if(flg==0) return true;
+        }
+        return false;
+    }
     private void saveFile(String folderName, String fileName, String fileText, Context context){
         FileOutputStream fileOutputStream = null;
         File file = null;
-        fileName = fileName + ".txt";
+        fileName = fileName + ".csv";
         try{
             file = new File(context.getExternalFilesDir(folderName), fileName);
             fileOutputStream = new FileOutputStream(file);
@@ -217,6 +296,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
             Toast.makeText(CourseOfferingsActivity.this,"Saved to "+CourseOfferingsActivity.this.getExternalFilesDir("CourseAttendance")+"/"+fileName, Toast.LENGTH_LONG).show();
             ///openFile(file, currentCourse);
             ///shareFile(file, currentCourse);
+            openFile(file,CourseOfferingsActivity.this);
 
         }
         catch (Exception e){
@@ -269,6 +349,36 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         return fileText;
 
+    }
+    private void openFile(File file, Context context){
+        try {
+
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            {
+                uri = FileProvider.getUriForFile(context ,context.getPackageName() + ".provider", file);
+            } else
+            {
+                uri = Uri.fromFile(file);
+            }
+            String mime="/*";
+            ///Important_need2learnHowItWorks///
+            MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
+            if(mimeTypeMap.hasExtension(mimeTypeMap.getFileExtensionFromUrl(uri.toString())))
+            {
+                mime=mimeTypeMap.getMimeTypeFromExtension(mimeTypeMap.getFileExtensionFromUrl(uri.toString()));
+            }
+
+            Intent intent=new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(uri,mime);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            context.startActivity(intent);
+
+
+        }
+        catch (Exception e){
+            Log.e("stdntLst", e.toString());
+        }
     }
 
 }

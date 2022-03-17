@@ -18,6 +18,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.luhelpmate.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +42,7 @@ public class Make_Routine extends AppCompatActivity {
     private AutoCompleteTextView addInitial, addBatch, addSection, addCourseCode, addRoom;
     private Spinner daySpinner, timeSlotSpinner, departmentSpinner;
     private LinearLayout linearLayout;
+    TextInputLayout textInputLayout;
     private Button update;
     private String initial, day, timeSlot, department, batch, section, code, room;
     String[] deptItems = new String[]{"Select Department", "CSE", "EEE", "ARCHI", "CE", "BuA", "ENG", "LAW", "IS", "BNG", "THM", "PH"};
@@ -136,6 +139,7 @@ public class Make_Routine extends AppCompatActivity {
         timeSlotSpinner = findViewById(R.id.timeSlot);
         departmentSpinner = findViewById(R.id.department);
         linearLayout = findViewById(R.id.linear);
+        textInputLayout = findViewById(R.id.i);
         addBatch = findViewById(R.id.batch);
         addSection = findViewById(R.id.section);
         addCourseCode = findViewById(R.id.code);
@@ -192,6 +196,7 @@ public class Make_Routine extends AppCompatActivity {
                         linearLayout.setVisibility(View.GONE);
                     } else {
                         addInitial.setVisibility(View.GONE);
+                        textInputLayout.setVisibility(View.GONE);
                     }
                 }
             }
@@ -253,7 +258,6 @@ public class Make_Routine extends AppCompatActivity {
 
     private void searchCode(DataSnapshot snapshot) {
         ArrayList<String> code = new ArrayList<>();
-
         if (snapshot.exists()) {
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                 String courseCode = dataSnapshot.child("code").getValue(String.class);
@@ -280,6 +284,7 @@ public class Make_Routine extends AppCompatActivity {
 
 
     private void uploadData() {
+        pd.show();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(uid);
         df.addSnapshotListener(new EventListener<DocumentSnapshot>() {
@@ -374,6 +379,8 @@ public class Make_Routine extends AppCompatActivity {
                                 addRoom.setError("Enter Room");
                                 addRoom.requestFocus();
                             } else {
+                                pd.setMessage("Updating...");
+                                pd.show();
                                 dbRef = referenceS.child(matcherDigit.group()).child(day);
 
                                 final String uniqueKey = dbRef.push().getKey();
@@ -407,6 +414,8 @@ public class Make_Routine extends AppCompatActivity {
                             addRoom.setError("Enter Room");
                             addRoom.requestFocus();
                         } else if (matcherLetter.find()){
+                            pd.setMessage("Updating...");
+                            pd.show();
                             dbRef = referenceT.child(matcherLetter.group()).child(day);
                             final String uniqueKey = dbRef.push().getKey();
                             RoutineData data = new RoutineData(matcherLetter.group(), day, timeSlot, department, batch, section, code, room, uniqueKey);

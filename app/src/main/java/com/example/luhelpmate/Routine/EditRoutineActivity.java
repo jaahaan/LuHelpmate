@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.luhelpmate.CourseOfferings.CourseOfferingsActivity;
 import com.example.luhelpmate.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +39,7 @@ public class EditRoutineActivity extends AppCompatActivity {
     private DatabaseReference dayRef, batchRef, codeRef, timeRef, initialRef, roomRef, referenceT, referenceS, dbRef;
     private AutoCompleteTextView addDay, addTimeSlot, addDepartment, addInitial, addBatch, addSection, addCourseCode, addRoom;
     private LinearLayout linearLayout;
+    private TextInputLayout textInputLayout;
     private ProgressDialog pd;
     private Button update;
     private String initial, day, timeSlot, department, batch, section, code, room;
@@ -131,6 +134,7 @@ public class EditRoutineActivity extends AppCompatActivity {
         addTimeSlot = findViewById(R.id.timeSlot);
         addDepartment = findViewById(R.id.department);
         linearLayout = findViewById(R.id.linear);
+        textInputLayout = findViewById(R.id.i);
         addBatch = findViewById(R.id.batch);
         addSection = findViewById(R.id.section);
         addCourseCode = findViewById(R.id.code);
@@ -170,6 +174,7 @@ public class EditRoutineActivity extends AppCompatActivity {
                         addRoom.setText(room);
                     } else {
                         addInitial.setVisibility(View.GONE);
+                        textInputLayout.setVisibility(View.GONE);
                         //Setting exiting texts into AutocompleteTextView
                         addDay.setText(day);
                         addTimeSlot.setText(timeSlot);
@@ -183,111 +188,136 @@ public class EditRoutineActivity extends AppCompatActivity {
             }
         });
 
+        update.setOnClickListener(v -> uploadData());
 
-        update.setOnClickListener(v -> checkValidation());
-
-    }
-
-    private void checkValidation() {
-        day = addDay.getText().toString().trim();
-        timeSlot = addTimeSlot.getText().toString().trim();
-        department = addDepartment.getText().toString().trim();
-        batch = addBatch.getText().toString().trim();
-        section = addSection.getText().toString().trim();
-        initial = addInitial.getText().toString().trim();
-        code = addCourseCode.getText().toString().trim();
-        room = addRoom.getText().toString().trim();
-
-        Pattern p = Pattern.compile("[a-z A-Z.]+");
-        if (day.isEmpty()) {
-            addDay.setError("Enter Day");
-            addDay.requestFocus();
-        } else if (timeSlot.isEmpty()) {
-            addTimeSlot.setError("Enter Slot");
-            addTimeSlot.requestFocus();
-        } else if (department.isEmpty()) {
-            addDepartment.setError("Enter Department");
-            addDepartment.requestFocus();
-        } else if (batch.isEmpty()) {
-            addBatch.setError("Enter batch");
-            addBatch.requestFocus();
-        } else if (initial.isEmpty()) {
-            addInitial.setError("Enter Semester");
-            addInitial.requestFocus();
-        } else if (!p.matcher(initial).matches()) {
-            addInitial.setError("Initial can be only Alphabet");
-            addInitial.requestFocus();
-        } else if (code.isEmpty()) {
-            addCourseCode.setError("Enter Course Code");
-            addCourseCode.requestFocus();
-        } else if (room.isEmpty()) {
-            addRoom.setError("Enter Room");
-            addRoom.requestFocus();
-        } else {
-            pd.setMessage("Updating...");
-            pd.show();
-            uploadData();
-        }
     }
 
     private void uploadData() {
+        Pattern p = Pattern.compile("[a-z A-Z.]+");
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference df = FirebaseFirestore.getInstance().collection("Users").document(uid);
         df.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
-
-
+                    day = addDay.getText().toString().trim();
+                    timeSlot = addTimeSlot.getText().toString().trim();
+                    department = addDepartment.getText().toString().trim();
+                    batch = addBatch.getText().toString().trim();
+                    section = addSection.getText().toString().trim();
+                    initial = addInitial.getText().toString().trim();
+                    code = addCourseCode.getText().toString().trim();
+                    room = addRoom.getText().toString().trim();
                     Pattern digit = Pattern.compile("[\\d]+");
-                    Pattern letter = Pattern.compile("[A-Z]");
-                    Matcher digitMatcher = digit.matcher(value.getString("initial"));
-                    Matcher letterMatcher = letter.matcher(value.getString("initial"));
-                    if (digitMatcher.find()) {
-                        if (letterMatcher.find()) {
-                            dbRef = referenceS.child(digitMatcher.group()).child(letterMatcher.group()).child(day);
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("day", day);
-                            map.put("timeSlot", timeSlot);
-                            map.put("department", department);
-                            map.put("batch", digitMatcher.group());
-                            map.put("section", letterMatcher.group());
-                            map.put("initial", initial);
-                            map.put("code", code);
-                            map.put("room", room);
-                            String uniqueKey = getIntent().getStringExtra("key");
-                            map.put("key", uniqueKey);
-
-                            dbRef.child(uniqueKey).setValue(map).addOnSuccessListener(unused -> {
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-
-                            }).addOnFailureListener(e -> {
-                                pd.dismiss();
-                                Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                            });
+                    Pattern letter = Pattern.compile("[A-Z]+");
+                    Matcher matcherDigit = digit.matcher(value.getString("initial"));
+                    Matcher matcherLetter = letter.matcher(value.getString("initial"));
+                    if (matcherDigit.find()) {
+                        if (matcherLetter.find()) {
+                            if (day.equals("Day")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (timeSlot.equals("Time Slots")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (department.equals("Select Department")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
+                                return;
+                            } if (initial.isEmpty()) {
+                                addInitial.setError("Enter Initial");
+                                addInitial.requestFocus();
+                            } else if (!p.matcher(initial).matches()) {
+                                addInitial.setError("Initial can be only Alphabet");
+                                addInitial.requestFocus();
+                            } else if (code.isEmpty()) {
+                                addCourseCode.setError("Enter Course Code");
+                                addCourseCode.requestFocus();
+                            } else if (room.isEmpty()) {
+                                addRoom.setError("Enter Room");
+                                addRoom.requestFocus();
+                            } else {
+                                pd.setMessage("Updating...");
+                                pd.show();
+                                dbRef = referenceS.child(matcherDigit.group()).child(matcherLetter.group()).child(day);
+                                final String uniqueKey = getIntent().getStringExtra("key");
+                                RoutineData data = new RoutineData(initial, day, timeSlot, department, matcherDigit.group(), matcherLetter.group(), code, room, uniqueKey);
+                                dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }).addOnFailureListener(e -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                });
+                            }
                         } else {
-                            dbRef = referenceS.child(digitMatcher.group()).child(day);
+                            if (day.equals("Day")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (timeSlot.equals("Time Slots")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (department.equals("Select Department")) {
+                                Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
+                                return;
+                            } else if (initial.isEmpty()) {
+                                addInitial.setError("Enter Initial");
+                                addInitial.requestFocus();
+                            } else if (!p.matcher(initial).matches()) {
+                                addInitial.setError("Initial can be only Alphabet");
+                                addInitial.requestFocus();
+                            } else if (code.isEmpty()) {
+                                addCourseCode.setError("Enter Course Code");
+                                addCourseCode.requestFocus();
+                            } else if (room.isEmpty()) {
+                                addRoom.setError("Enter Room");
+                                addRoom.requestFocus();
+                            } else {
+                                pd.setMessage("Updating...");
+                                pd.show();
+                                dbRef = referenceS.child(matcherDigit.group()).child(day);
+                                final String uniqueKey = getIntent().getStringExtra("key");
 
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("day", day);
-                            map.put("timeSlot", timeSlot);
-                            map.put("department", department);
-                            map.put("batch", digitMatcher.group());
-                            map.put("section", "");
-                            map.put("initial", initial);
-                            map.put("code", code);
-                            map.put("room", room);
-                            String uniqueKey = getIntent().getStringExtra("key");
-                            map.put("key", uniqueKey);
-
-                            dbRef.child(uniqueKey).setValue(map).addOnSuccessListener(unused -> {
+                                RoutineData data = new RoutineData(initial, day, timeSlot, department, matcherDigit.group(), "", code, room, uniqueKey);
+                                dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }).addOnFailureListener(e -> {
+                                    pd.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        }
+                    } else {
+                        if (day.equals("Day")) {
+                            Toast.makeText(getApplicationContext(), "Please Select Day", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (timeSlot.equals("Time Slots")) {
+                            Toast.makeText(getApplicationContext(), "Please Select Time Slot", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (department.equals("Select Department")) {
+                            Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else if (code.isEmpty()) {
+                            addCourseCode.setError("Enter Course Code");
+                            addCourseCode.requestFocus();
+                        } else if (room.isEmpty()) {
+                            addRoom.setError("Enter Room");
+                            addRoom.requestFocus();
+                        } else if (matcherLetter.find()){
+                            pd.setMessage("Updating...");
+                            pd.show();
+                            dbRef = referenceT.child(matcherLetter.group()).child(day);
+                            final String uniqueKey = getIntent().getStringExtra("key");
+                            RoutineData data = new RoutineData(matcherLetter.group(), day, timeSlot, department, batch, section, code, room, uniqueKey);
+                            dbRef.child(uniqueKey).setValue(data).addOnSuccessListener(unused -> {
                                 pd.dismiss();
                                 Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-
                                 Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
@@ -296,47 +326,6 @@ public class EditRoutineActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
                             });
                         }
-
-                    } else {
-                        dbRef = referenceT.child(letterMatcher.group()).child(day);
-
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("day", day);
-                        map.put("timeSlot", timeSlot);
-                        map.put("department", department);
-                        map.put("batch", batch);
-                        map.put("section", section);
-                        map.put("initial", letterMatcher.group());
-                        map.put("code", code);
-                        map.put("room", room);
-                        String uniqueKey = getIntent().getStringExtra("key");
-                        map.put("key", uniqueKey);
-
-                        dbRef.child(uniqueKey).setValue(map).addOnSuccessListener(unused -> {
-                            pd.dismiss();
-                            Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                            timeRef.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    searchTime(snapshot);
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                }
-                            });
-                            Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        }).addOnFailureListener(e -> {
-                            pd.dismiss();
-                            Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), RoutineActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent);
-                        });
-
                     }
                 }
             }
