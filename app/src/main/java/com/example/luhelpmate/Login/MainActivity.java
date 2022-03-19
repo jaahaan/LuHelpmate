@@ -37,7 +37,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     public static final int GOOGLE_SIGN_IN_CODE = 105;
-    SignInButton SignIn;
+    private SignInButton SignIn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
     private ProgressDialog pd;

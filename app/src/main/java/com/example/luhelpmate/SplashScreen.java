@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
     private SpinKitView spinKitView;
 
     private FirebaseAuth mAuth;
-    private FirebaseFirestore firestore;
+    //private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,7 @@ public class SplashScreen extends AppCompatActivity {
         spinKitView = findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
+        //firestore = FirebaseFirestore.getInstance();
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -67,9 +67,10 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
+    /**
     @Override
     public void onStop() {
         super.onStop();
-    }
+    }*/
 
 }

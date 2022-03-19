@@ -39,8 +39,8 @@ public class StudentFragment extends Fragment {
     private EditText name, id, batch, section, email;
     private Spinner departmentSpinner;
     private String department;
-    private Pattern n = Pattern.compile("[a-z A-Z.]+");
-    private Pattern e = Pattern.compile("(cse_)[\\d]{10}(@lus.ac.bd)");
+    private Pattern namePattern = Pattern.compile("[a-z A-Z.]+");
+    private Pattern emailPattern = Pattern.compile("(cse_)[\\d]{10}(@lus.ac.bd)");
 
     private Button update;
     private ProgressBar progressBar;
@@ -85,7 +85,7 @@ public class StudentFragment extends Fragment {
                     name.setError("Empty");
                     name.requestFocus();
                     return;
-                } else if (!n.matcher(name.getText().toString()).matches()) {
+                } else if (!namePattern.matcher(name.getText().toString()).matches()) {
                     name.setError("Name can be only Alphabet");
                     name.requestFocus();
                     return;
@@ -108,7 +108,7 @@ public class StudentFragment extends Fragment {
                     email.setError("Empty");
                     email.requestFocus();
                     return;
-                } else if (!e.matcher(email.getText().toString()).matches()) {
+                } else if (!emailPattern.matcher(email.getText().toString()).matches()) {
                     email.setError("This is not a Student Email");
                     email.requestFocus();
                     return;

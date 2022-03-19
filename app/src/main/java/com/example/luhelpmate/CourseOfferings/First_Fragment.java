@@ -24,7 +24,7 @@ public class First_Fragment extends Fragment {
 
     private RecyclerView recyclerView;
     private ArrayList<CourseOfferingsData> list;
-    CourseOfferingAdapter adapter;
+    private CourseOfferingAdapter adapter;
     private ProgressBar progressBar;
     private TextView textView;
     private LinearLayout linearLayout;
@@ -72,6 +72,5 @@ public class First_Fragment extends Fragment {
 
         return root;
     }
-
 
 }

@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.NotificationChannel;
@@ -25,11 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.luhelpmate.Advisor.AdvisorList;
-import com.example.luhelpmate.Book.BookAdapter;
-import com.example.luhelpmate.Book.BookData;
 import com.example.luhelpmate.R;
-import com.example.luhelpmate.Routine.RoutineViewPagerAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -38,7 +33,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -50,19 +44,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CourseOfferingsActivity extends AppCompatActivity {
 
-    FloatingActionButton fab;
-    FirebaseFirestore firestore;
+    private FloatingActionButton fab;
+    private FirebaseFirestore firestore;
     private TextView session, year, updateDate ;
-    private LinearLayout lastupdated;
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    private LinearLayout lastUpdated;
+    private CourseViewPagerAdapter adapter;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +66,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         session = findViewById(R.id.session);
         year = findViewById(R.id.year);
-        lastupdated = findViewById(R.id.lastUpdated);
+        lastUpdated = findViewById(R.id.lastUpdated);
         updateDate = findViewById(R.id.date);
         firestore = FirebaseFirestore.getInstance();
 
@@ -136,7 +130,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         });
 
-        final CourseViewPagerAdapter adapter = new CourseViewPagerAdapter(getSupportFragmentManager(), this, tabLayout.getTabCount());
+        adapter = new CourseViewPagerAdapter(getSupportFragmentManager(), this, tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -149,7 +143,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
                     if (value.getString("admin").equals("1")) {
-                        lastupdated.setOnClickListener(new View.OnClickListener() {
+                        lastUpdated.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 DocumentReference df = firestore.collection("Last Updated").document("Course Offerings Updated");
@@ -198,20 +192,22 @@ public class CourseOfferingsActivity extends AppCompatActivity {
         fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), OfferCourse.class)));
 
     }
+
+/**
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.download, menu);
         MenuItem download = menu.findItem(R.id.download);
 
         download.setOnMenuItemClickListener(item -> {
             try{
-                String fileText=retreaveDataFromServer();
+                String fileText= retreveData();
                 saveFile("test","test1",fileText,CourseOfferingsActivity.this);
                 String savedString = "";
                 savedString = readFile("test","test1",CourseOfferingsActivity.this);
-                Log.v("stdntLst",savedString);
+                Log.v("List",savedString);
             }
             catch (Exception e){
-                Log.e("stdntLst", e.toString());
+                Log.e("Course", e.toString());
             }
 
 
@@ -220,8 +216,8 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-    private String retreaveDataFromServer(){
-        String s="id, batch, section\n250, 50, F\n260, 53, E\n255, 50, C\n";
+    private String retreveData(){
+        String s="id, batch, section\n238, 50, F\n239, 50, F\n24, , \n";
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Course Offerings").child("10th");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -253,7 +249,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
                             }
 
 
-                            Log.e("stdntLst2",snapshot2.getKey().toString()+"__"+snapshot2.getValue().toString());
+                            Log.e("course2",snapshot2.getKey().toString()+"__"+snapshot2.getValue().toString());
                         }
                     }
 
@@ -300,7 +296,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         }
         catch (Exception e){
-            Log.e("stdntLst", e.toString());
+            Log.e("course", e.toString());
         }
         finally {
             if(fileOutputStream!=null){
@@ -308,7 +304,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
                     fileOutputStream.close();
                 }
                 catch (Exception e){
-                    Log.e("stdntLst", e.toString());
+                    Log.e("course", e.toString());
                 }
             }
         }
@@ -327,14 +323,14 @@ public class CourseOfferingsActivity extends AppCompatActivity {
                 buffer.append((char) i);
             }
             fileText = buffer.toString();
-            Log.v("StdntlstDM",fileText);
+            Log.v("listDM",fileText);
             //Toast.makeText(currentCourse.getContext(),"Saved to "+currentCourse.getContext().getExternalFilesDir("CourseAttendance")+"/"+fileName,Toast.LENGTH_LONG).show();
             ///openFile(file, currentCourse);
             ///shareFile(file, currentCourse);
 
         }
         catch (Exception e){
-            Log.e("stdntLst", e.toString());
+            Log.e("course", e.toString());
         }
         finally {
             if(fileInputStream!=null){
@@ -342,7 +338,7 @@ public class CourseOfferingsActivity extends AppCompatActivity {
                     fileInputStream.close();
                 }
                 catch (Exception e){
-                    Log.e("stdntLst", e.toString());
+                    Log.e("course", e.toString());
                 }
             }
         }
@@ -377,8 +373,9 @@ public class CourseOfferingsActivity extends AppCompatActivity {
 
         }
         catch (Exception e){
-            Log.e("stdntLst", e.toString());
+            Log.e("course", e.toString());
         }
     }
+*/
 
 }

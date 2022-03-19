@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class EditCourseOfferings extends AppCompatActivity {
 
-    private DatabaseReference sRef, cRef, tRef, reference, dbRef;
+    private DatabaseReference semesterRef, courseRef, teacherRef, reference, dbRef;
     private AutoCompleteTextView addSemester, addCourseCode, teacherInitial;
     private ProgressDialog pd;
     private Button update;
@@ -36,9 +36,9 @@ public class EditCourseOfferings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_course_offerings);
 
-        tRef = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
-        sRef = FirebaseDatabase.getInstance().getReference().child("Semester");
-        cRef = FirebaseDatabase.getInstance().getReference().child("Course List");
+        teacherRef = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
+        semesterRef = FirebaseDatabase.getInstance().getReference().child("Semester");
+        courseRef = FirebaseDatabase.getInstance().getReference().child("Course List");
 
         reference = FirebaseDatabase.getInstance().getReference().child("Course Offerings");
 
@@ -60,7 +60,7 @@ public class EditCourseOfferings extends AppCompatActivity {
 
         update.setOnClickListener(v -> checkValidation());
 
-        sRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        semesterRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 searchSemester(snapshot);
@@ -71,7 +71,7 @@ public class EditCourseOfferings extends AppCompatActivity {
 
             }
         });
-        cRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        courseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 searchCourse(snapshot);
@@ -82,7 +82,7 @@ public class EditCourseOfferings extends AppCompatActivity {
 
             }
         });
-        tRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        teacherRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 searchTeacher(snapshot);
@@ -152,11 +152,10 @@ public class EditCourseOfferings extends AppCompatActivity {
         else {
             pd.setMessage("Updating...");
             pd.show();
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Course List");
-            reference.addValueEventListener(new ValueEventListener() {
+            courseRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    check(snapshot);
+                    courseDetails(snapshot);
                 }
 
                 @Override
@@ -167,7 +166,7 @@ public class EditCourseOfferings extends AppCompatActivity {
         }
     }
 
-    private void check(DataSnapshot snapshot) {
+    private void courseDetails(DataSnapshot snapshot) {
         if (snapshot.exists()) {
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                 String data = dataSnapshot.child("code").getValue(String.class);

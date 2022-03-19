@@ -38,7 +38,7 @@ public class BatchListActivity extends AppCompatActivity{
     private ProgressBar progressBar;
     private RecyclerView addBatchRecyclerView;
     private ArrayList<BatchData> batchDataArrayList;
-    private DatabaseReference reference, dbRef;
+    private DatabaseReference reference;
     private ProgressDialog pd;
     private String batch, section;
 
@@ -124,31 +124,6 @@ public class BatchListActivity extends AppCompatActivity{
             Toast.makeText(BatchListActivity.this, "Added", Toast.LENGTH_SHORT).show();
             addBatch.setText("");
             addSection.setText("");
-
-            /**Intent intent = new Intent(this, BatchListActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "Batch Notification")
-                    .setSmallIcon(R.drawable.splashicon)
-                    .setContentTitle("New Batch")
-                    .setContentText("Batch: " +batch).setStyle(new NotificationCompat.BigTextStyle())
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setContentIntent(pendingIntent).setAutoCancel(true);
-
-            NotificationManager mNotificationManager = (NotificationManager)
-                    getSystemService(Context. NOTIFICATION_SERVICE ) ;
-            if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES. O ) {
-                int importance = NotificationManager. IMPORTANCE_HIGH ;
-                NotificationChannel notificationChannel = new NotificationChannel( "Batch Notification" , "Batch Notification" , importance) ;
-                builder.setChannelId( "Batch Notification" ) ;
-                assert mNotificationManager != null;
-                mNotificationManager.createNotificationChannel(notificationChannel) ;
-            }
-            assert mNotificationManager != null;
-            mNotificationManager.notify(( int ) System. currentTimeMillis () ,
-                    builder.build()) ;*/
 
         }).addOnFailureListener(e -> {
             pd.dismiss();

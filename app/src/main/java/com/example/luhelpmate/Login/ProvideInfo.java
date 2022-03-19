@@ -16,10 +16,9 @@ import com.google.android.material.tabs.TabLayout;
 public class ProvideInfo extends AppCompatActivity {
 
 
-    TabLayout tabLayout;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     private ImageView image;
-    ViewPager viewPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

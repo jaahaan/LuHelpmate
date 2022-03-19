@@ -112,6 +112,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginStart="100dp"
         android:background="@color/bgOpacity1" />
 </LinearLayout>

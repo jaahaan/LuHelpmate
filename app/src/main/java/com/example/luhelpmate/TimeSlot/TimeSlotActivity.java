@@ -48,7 +48,7 @@ public class TimeSlotActivity extends AppCompatActivity {
     private DatabaseReference reference, dbRef;
     private ProgressDialog pd;
     private String time;
-    TimeSlotAdapter adapter;
+    private TimeSlotAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

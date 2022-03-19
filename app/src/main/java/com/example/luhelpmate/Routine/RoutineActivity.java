@@ -1,14 +1,18 @@
 package com.example.luhelpmate.Routine;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
 import com.example.luhelpmate.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -23,15 +27,16 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class RoutineActivity extends AppCompatActivity{
+public class RoutineActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
     private FirebaseFirestore firestore;
-    private TextView session, year ;
+    private TextView session, year;
     private RoutineViewPagerAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -96,63 +101,53 @@ public class RoutineActivity extends AppCompatActivity{
         df.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(value != null && value.exists()){
-                    if (value.getString("admin").equals("1")){
-                        fab.setVisibility(View.VISIBLE);
+                if (value != null && value.exists()) {
+                    Pattern p = Pattern.compile("[\\d]+");
+                    Matcher m = p.matcher(value.getString("initial"));
+                    if (m.find()) {
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Cr Info");
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        String data = dataSnapshot.child("email").getValue(String.class);
+                                        if (value.getString("email").equals(data)) {
+                                            fab.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     } else {
-                        Pattern digit = Pattern.compile("[\\d]+");
-                        Matcher matcherDigit = digit.matcher(value.getString("initial"));
-
-                        //For Alphabet
-                        Pattern letter = Pattern.compile("[A-Z]+");
-                        Matcher matcherLetter = letter.matcher(value.getString("initial"));
-                        if (matcherDigit.find()) {
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Cr Info");
-                            reference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.exists()) {
-                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                            String emailData = dataSnapshot.child("email").getValue(String.class);
-                                            String batchData = dataSnapshot.child("batch").getValue(String.class);
-                                            if (value.getString("email").equals(emailData)) {
-                                                fab.setVisibility(View.VISIBLE);
-                                            } else {
-                                                fab.setVisibility(View.GONE);
-                                            }
+                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
+                        reference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        String data = dataSnapshot.child("email").getValue(String.class);
+                                        if (value.getString("email").equals(data)) {
+                                            fab.setVisibility(View.VISIBLE);
                                         }
                                     }
                                 }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                            }
 
-                                }
-                            });
-                        } else {
-                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
-                            reference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (snapshot.exists()) {
-                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                            String data = dataSnapshot.child("email").getValue(String.class);
-                                            if (value.getString("email").equals(data)) {
-                                                fab.setVisibility(View.VISIBLE);
-                                            } else {
-                                                fab.setVisibility(View.GONE);
-                                            }
-                                        }
-                                    }
-                                }
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                }
-                            });
-                        }
+                            }
+                        });
                     }
                 }
             }
+
         });
 
         fab.setOnClickListener(new View.OnClickListener() {

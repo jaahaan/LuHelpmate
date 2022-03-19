@@ -42,7 +42,7 @@ public class Make_Routine extends AppCompatActivity {
     private AutoCompleteTextView addInitial, addBatch, addSection, addCourseCode, addRoom;
     private Spinner daySpinner, timeSlotSpinner, departmentSpinner;
     private LinearLayout linearLayout;
-    TextInputLayout textInputLayout;
+    private TextInputLayout textInputLayout;
     private Button update;
     private String initial, day, timeSlot, department, batch, section, code, room;
     String[] deptItems = new String[]{"Select Department", "CSE", "EEE", "ARCHI", "CE", "BuA", "ENG", "LAW", "IS", "BNG", "THM", "PH"};

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class OfferCourse extends AppCompatActivity {
 
 
-    private DatabaseReference sRef, cRef, tRef, reference, dbRef;
+    private DatabaseReference semesterRef, courseRef, teacherRef, reference, dbRef;
     private AutoCompleteTextView addCourseCode, teacherInitial;
     private Spinner semesterSpinner;
     private ProgressDialog pd;
@@ -41,9 +41,9 @@ public class OfferCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_course);
 
-        tRef = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
-        sRef = FirebaseDatabase.getInstance().getReference().child("Semester");
-        cRef = FirebaseDatabase.getInstance().getReference().child("Course List");
+        teacherRef = FirebaseDatabase.getInstance().getReference().child("Faculty Info");
+        semesterRef = FirebaseDatabase.getInstance().getReference().child("Semester");
+        courseRef = FirebaseDatabase.getInstance().getReference().child("Course List");
 
         reference = FirebaseDatabase.getInstance().getReference().child("Course Offerings");
 
@@ -57,7 +57,7 @@ public class OfferCourse extends AppCompatActivity {
 
         update.setOnClickListener(v -> checkValidation());
 
-        sRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        semesterRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 searchSemester(snapshot);
@@ -68,10 +68,10 @@ public class OfferCourse extends AppCompatActivity {
 
             }
         });
-        cRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        courseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                searchCourse(snapshot);
+                searchCode(snapshot);
             }
 
             @Override
@@ -79,7 +79,7 @@ public class OfferCourse extends AppCompatActivity {
 
             }
         });
-        tRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        teacherRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 searchTeacher(snapshot);
@@ -118,7 +118,7 @@ public class OfferCourse extends AppCompatActivity {
         }
     }
 
-    private void searchCourse(DataSnapshot snapshot) {
+    private void searchCode(DataSnapshot snapshot) {
         ArrayList<String> list1 = new ArrayList<>();
 
         if (snapshot.exists()) {
@@ -144,7 +144,6 @@ public class OfferCourse extends AppCompatActivity {
         }
     }
 
-
     private void checkValidation() {
         code = addCourseCode.getText().toString().trim();
         initial = teacherInitial.getText().toString().trim();
@@ -154,12 +153,7 @@ public class OfferCourse extends AppCompatActivity {
         } else if (code.isEmpty()) {
             addCourseCode.setError("Enter Course Code");
             addCourseCode.requestFocus();
-        } /**else if (initial.isEmpty()) {
-         initial = "-";
-         pd.setMessage("Updating...");
-         pd.show();
-
-         }*/
+        }
         else {
             pd.setMessage("Updating...");
             pd.show();
@@ -167,7 +161,7 @@ public class OfferCourse extends AppCompatActivity {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    check(snapshot);
+                    courseDetails(snapshot);
                 }
 
                 @Override
@@ -178,7 +172,7 @@ public class OfferCourse extends AppCompatActivity {
         }
     }
 
-    private void check(DataSnapshot snapshot) {
+    private void courseDetails(DataSnapshot snapshot) {
         if (snapshot.exists()) {
             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                 String data = dataSnapshot.child("code").getValue(String.class);

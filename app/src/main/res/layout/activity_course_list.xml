@@ -60,23 +60,23 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/courseList"
+                    style="@style/list"
                     android:layout_weight="1"
                     android:text="@string/CourseCode" />
 
 
                 <TextView
-                    style="@style/courseList"
+                    style="@style/list"
                     android:layout_weight="2"
                     android:text="@string/CourseTitle" />
 
                 <TextView
-                    style="@style/courseList"
+                    style="@style/list"
                     android:layout_weight="1"
                     android:text="@string/credit" />
 
                 <TextView
-                    style="@style/courseList"
+                    style="@style/list"
                     android:layout_weight="1.2"
                     android:text="@string/prerequisite" />
             </LinearLayout>

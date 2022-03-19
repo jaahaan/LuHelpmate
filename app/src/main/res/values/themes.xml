@@ -40,7 +40,7 @@
         <item name="maxLines">2</item>
     </style>
 
-    <style name="courseList">
+    <style name="list">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
@@ -51,6 +51,18 @@
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:textColor">@color/EerieBlack_800</item>
     </style>
+
+    <style name="courseList">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingStart">1dp</item>
+        <item name="android:paddingEnd">1dp</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+    </style>
+
 
     <style name="batchList">
         <item name="android:layout_width">0dp</item>

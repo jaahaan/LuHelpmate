@@ -64,13 +64,11 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference sliderRef;
     private SliderAdapter adapter;
 
-    private FirebaseAuth mAuth;
-    private TextView dept, textView, date;
-    private CardView courseOfferings, routine, books, faculty, cr, notice, advisor, courseList;
-    ImageView fb, website, map;
+    //private FirebaseAuth mAuth;
+    private TextView dept, session, date;
+    private CardView routine, courseOfferings, faculty, cr, advisor, courseList, books, notice;
+    private ImageView fb, website, map;
     private FirebaseFirestore firestore;
-
-    private RecyclerView recyclerView;
     private ProgressBar progressBar;
 
     @Override
@@ -78,14 +76,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        recyclerView = findViewById(R.id.recycler);
         progressBar = findViewById(R.id.progressBar);
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
 
         sliderView = findViewById(R.id.image_slider);
         dept = findViewById(R.id.dept);
-        textView = findViewById(R.id.text);
+        session = findViewById(R.id.text);
         date = findViewById(R.id.date);
 
         Calendar forYear = Calendar.getInstance();
@@ -98,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
-                    textView.setText(value.getString("session"));
+                    session.setText(value.getString("session"));
                     date.setText(value.getString("year"));
                 }
             }
@@ -157,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
                     if (value.getString("admin").equals("1")) {
-                        textView.setOnClickListener(new View.OnClickListener() {
+                        session.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 DocumentReference df = firestore.collection("Session").document("Session");

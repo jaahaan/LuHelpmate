@@ -43,7 +43,7 @@ public class TeacherFragment extends Fragment {
     private EditText name, initial, email;
     private Spinner designationSpinner, departmentSpinner;
     private String department, designation;
-    private Pattern n = Pattern.compile("[a-z A-Z.]+");
+    private Pattern namePattern = Pattern.compile("[a-z A-Z.]+");
 
     private Button update;
     private ProgressBar progressBar;
@@ -108,13 +108,13 @@ public class TeacherFragment extends Fragment {
                 if (name.getText().toString().isEmpty()) {
                     name.setError("Empty");
                     name.requestFocus();
-                } else if (!n.matcher(name.getText().toString()).matches()) {
+                } else if (!namePattern.matcher(name.getText().toString()).matches()) {
                     name.setError("Name can be only Alphabet");
                     name.requestFocus();
                 } else if (initial.getText().toString().isEmpty()) {
                     initial.setError("Empty");
                     initial.requestFocus();
-                } else if (!n.matcher(initial.getText().toString()).matches()) {
+                } else if (!namePattern.matcher(initial.getText().toString()).matches()) {
                     initial.setError("Initial can be only Alphabet");
                     initial.requestFocus();
                 } else if (designation.equals("Designation")) {
@@ -173,7 +173,6 @@ public class TeacherFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
         }
     }
-
     private void updateInfo() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

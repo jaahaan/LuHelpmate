@@ -13,7 +13,7 @@ import com.example.luhelpmate.Login.TeacherFragment;
 public class ProvideInfoAdapter extends FragmentPagerAdapter {
 
     private Context context;
-    int totalTabs;
+    private int totalTabs;
 
     public ProvideInfoAdapter(FragmentManager fm, Context context, int totalTabs) {
         super(fm);
